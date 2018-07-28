@@ -79,7 +79,7 @@ public class ReturnBookUI {
     }
 
     
-    public void display(Object object) {
+    public void displayOutput(Object object) {
         printOutput(object);
     }
 
