@@ -13,6 +13,7 @@ public class ReturnBookUI {
     private Scanner input;
     private UiState state;
 
+    
     public ReturnBookUI(ReturnBookControl control) {
         this.control = control;
         input = new Scanner(System.in);
@@ -20,6 +21,7 @@ public class ReturnBookUI {
         control.setUI(this);
     }
 
+    
     public void run() {
         output("Return Book Use Case UI\n");
 
@@ -63,19 +65,23 @@ public class ReturnBookUI {
         }
     }
 
+    
     private String input(String prompt) {
         System.out.print(prompt);
         return input.nextLine();
     }
 
+    
     private void output(Object object) {
         System.out.println(object);
     }
 
+    
     public void display(Object object) {
         output(object);
     }
 
+    
     public void setState(UiState state) {
         this.state = state;
     }
