@@ -56,7 +56,7 @@ public class ReturnBookUI {
     
                 case COMPLETED:
                     printOutput("Return processing complete");
-                    return;
+                    break;
     
                 default:
                     printOutput("Unhandled state");
