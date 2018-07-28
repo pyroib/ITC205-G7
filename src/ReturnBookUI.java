@@ -68,7 +68,8 @@ public class ReturnBookUI {
     
     private String getInput(String prompt) {
         System.out.print(prompt);
-        return input.nextLine();
+        String promptInput = input.nextLine();
+        return promptInput;
     }
 
     
