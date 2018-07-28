@@ -53,7 +53,8 @@ public class ReturnBookUI {
                         isDamaged = true;
                     }
                     control.dischargeLoan(isDamaged);
-    
+                    break;
+                       
                 case COMPLETED:
                     printOutput("Return processing complete");
                     break;
