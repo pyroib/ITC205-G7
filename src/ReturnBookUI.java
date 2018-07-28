@@ -23,7 +23,7 @@ public class ReturnBookUI {
 
     
     public void run() {
-        output("Return Book Use Case UI\n");
+        printOutput("Return Book Use Case UI\n");
 
         while (true) {
 
@@ -33,7 +33,7 @@ public class ReturnBookUI {
                     break;
 
                 case READY:
-                    String bookStr = input("Scan Book (<enter> completes): ");
+                    String bookStr = getInput("Scan Book (<enter> completes): ");
                     if (bookStr.length() == 0) {
                         control.scanningComplete();
                     } else {
@@ -41,13 +41,13 @@ public class ReturnBookUI {
                             int bookId = Integer.valueOf(bookStr).intValue();
                             control.bookScanned(bookId);
                         } catch (NumberFormatException e) {
-                            output("Invalid bookId");
+                            printOutput("Invalid bookId");
                         }
                     }
                     break;
     
                 case INSPECTING:
-                    String ans = input("Is book damaged? (Y/N): ");
+                    String ans = getInput("Is book damaged? (Y/N): ");
                     boolean isDamaged = false;
                     if (ans.toUpperCase().equals("Y")) {
                         isDamaged = true;
@@ -55,30 +55,30 @@ public class ReturnBookUI {
                     control.dischargeLoan(isDamaged);
     
                 case COMPLETED:
-                    output("Return processing complete");
+                    printOutput("Return processing complete");
                     return;
     
                 default:
-                    output("Unhandled state");
+                    printOutput("Unhandled state");
                     throw new RuntimeException("ReturnBookUI : unhandled state :" + state);
             }
         }
     }
 
     
-    private String input(String prompt) {
+    private String getInput(String prompt) {
         System.out.print(prompt);
         return input.nextLine();
     }
 
     
-    private void output(Object object) {
+    private void printOutput(Object object) {
         System.out.println(object);
     }
 
     
     public void display(Object object) {
-        output(object);
+        printOutput(object);
     }
 
     
