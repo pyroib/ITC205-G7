@@ -1,5 +1,6 @@
 public class ReturnBookControl {
     
+    
     private ReturnBookUI UI;
 
     private enum ControlState {
@@ -9,16 +10,17 @@ public class ReturnBookControl {
     };
 
     private ControlState state;
-
     private library library;
     private loan currentLoan;
 
+    
     @SuppressWarnings("static-access")
     public ReturnBookControl() {
         this.library = library.INSTANCE();
         state = ControlState.INITIALISED;
     }
 
+    
     public void setUI(ReturnBookUI UI) {
         if (!state.equals(ControlState.INITIALISED)) {
             throw new RuntimeException("ReturnBookControl: cannot call setUI "
@@ -28,7 +30,8 @@ public class ReturnBookControl {
         UI.setState(ReturnBookUI.UI_STATE.READY);
         state = ControlState.READY;
     }
-
+    
+    
     public void bookScanned(int bookId) {
         if (!state.equals(ControlState.READY)) {
             throw new RuntimeException("ReturnBookControl: cannot call "
@@ -60,6 +63,7 @@ public class ReturnBookControl {
         state = ControlState.INSPECTING;
     }
 
+    
     public void scanningComplete() {
         if (!state.equals(ControlState.READY)) {
             throw new RuntimeException("ReturnBookControl: cannot call scanningComplete "
@@ -68,6 +72,7 @@ public class ReturnBookControl {
         UI.setState(ReturnBookUI.UI_STATE.COMPLETED);
     }
 
+    
     public void dischargeLoan(boolean isDamaged) {
         if (!state.equals(ControlState.INSPECTING)) {
             throw new RuntimeException("ReturnBookControl: cannot call dischargeLoan "
@@ -79,4 +84,5 @@ public class ReturnBookControl {
         state = ControlState.READY;
     }
 
+    
 }
