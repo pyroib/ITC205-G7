@@ -1,31 +1,31 @@
 public class PayFineControl {
 	
-	private PayFineUi ui;
-	private enum ControlState { INITIALISED, READY, PAYING, COMPLETED, CANCELLED };
-	private ControlState state;
+	private PayFineUI ui;
+	private enum CONTROL_STATE { INITIALISED, READY, PAYING, COMPLETED, CANCELLED };
+	private CONTROL_STATE state;
 	
-	private Library library;
-	private Member member;;
+	private library library;
+	private member member;;
 
 
 	public PayFineControl() {
-		this.library = library.instance();
-		state = ControlState.INITIALISED;
+		this.library = library.INSTANCE();
+		state = CONTROL_STATE.INITIALISED;
 	}
 	
 	
-	public void setUi(PayFineUi ui) {
-		if (!state.equals(ControlState.INITIALISED)) {
+	public void setUI(PayFineUI ui) {
+		if (!state.equals(CONTROL_STATE.INITIALISED)) {
 			throw new RuntimeException("PayFineControl: cannot call setUI except in INITIALISED state");
 		}	
 		this.ui = ui;
-		ui.setState(PayFineUi.UiState.READY);
-		state = ControlState.READY;		
+		ui.setState(PayFineUI.UI_STATE.READY);
+		state = CONTROL_STATE.READY;		
 	}
 
 
 	public void cardSwiped(int memberId) {
-		if (!state.equals(ControlState.READY)) {
+		if (!state.equals(CONTROL_STATE.READY)) {
 			throw new RuntimeException("PayFineControl: cannot call cardSwiped except in READY state");
 		}	
 		member = library.getMember(memberId);
@@ -35,19 +35,19 @@ public class PayFineControl {
 			return;
 		}
 		ui.display(member.toString());
-		ui.setState(PayFineUi.UiState.PAYING);
-		state = ControlState.PAYING;
+		ui.setState(PayFineUI.UI_STATE.PAYING);
+		state = CONTROL_STATE.PAYING;
 	}
 	
 	
 	public void cancel() {
-		ui.setState(PayFineUi.UiState.CANCELLED);
-		state = ControlState.CANCELLED;
+		ui.setState(PayFineUI.UI_STATE.CANCELLED);
+		state = CONTROL_STATE.CANCELLED;
 	}
 
 
 	public double payFine(double amount) {
-		if (!state.equals(ControlState.PAYING)) {
+		if (!state.equals(CONTROL_STATE.PAYING)) {
 			throw new RuntimeException("PayFineControl: cannot call payFine except in PAYING state");
 		}	
 		double change = member.payFine(amount);
@@ -55,8 +55,8 @@ public class PayFineControl {
 			ui.display(String.format("Change: $%.2f", change));
 		}
 		ui.display(member.toString());
-		ui.setState(PayFineUi.UiState.COMPLETED);
-		state = ControlState.COMPLETED;
+		ui.setState(PayFineUI.UI_STATE.COMPLETED);
+		state = CONTROL_STATE.COMPLETED;
 		return change;
 	}
 	

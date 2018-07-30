@@ -1,25 +1,25 @@
 import java.util.Scanner;
 
 
-public class PayFineUi {
+public class PayFineUI {
 
 
-	public static enum UiState { INITIALISED, READY, PAYING, COMPLETED, CANCELLED };
+	public static enum UI_STATE { INITIALISED, READY, PAYING, COMPLETED, CANCELLED };
 
 	private PayFineControl control;
 	private Scanner input;
-	private UiState state;
+	private UI_STATE state;
 
 	
-	public PayFineUi(PayFineControl control) {
+	public PayFineUI(PayFineControl control) {
 		this.control = control;
 		input = new Scanner(System.in);
-		state = UiState.INITIALISED;
-		control.setUi(this);
+		state = UI_STATE.INITIALISED;
+		control.setUI(this);
 	}
 	
 	
-	public void setState(UiState state) {
+	public void setState(UI_STATE state) {
 		this.state = state;
 	}
 
@@ -32,13 +32,13 @@ public class PayFineUi {
 			switch (state) {
 			
 			case READY:
-				String memberStr = input("Swipe member card (press <enter> to cancel): ");
-				if (memberStr.length() == 0) {
+				String memStr = input("Swipe member card (press <enter> to cancel): ");
+				if (memStr.length() == 0) {
 					control.cancel();
 					break;
 				}
 				try {
-					int memberId = Integer.valueOf(memberStr).intValue();
+					int memberId = Integer.valueOf(memStr).intValue();
 					control.cardSwiped(memberId);
 				}
 				catch (NumberFormatException e) {
@@ -48,13 +48,13 @@ public class PayFineUi {
 				
 			case PAYING:
 				double amount = 0;
-				String amountStr = input("Enter amount (<Enter> cancels) : ");
-				if (amountStr.length() == 0) {
+				String amtStr = input("Enter amount (<Enter> cancels) : ");
+				if (amtStr.length() == 0) {
 					control.cancel();
 					break;
 				}
 				try {
-					amount = Double.valueOf(amountStr).doubleValue();
+					amount = Double.valueOf(amtStr).doubleValue();
 				}
 				catch (NumberFormatException e) {}
 				if (amount <= 0) {
