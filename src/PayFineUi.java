@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 
-public class PayFineUI {
+public class PayFineUi {
 
 
 	public static enum UI_STATE { INITIALISED, READY, PAYING, COMPLETED, CANCELLED };
@@ -11,7 +11,7 @@ public class PayFineUI {
 	private UI_STATE state;
 
 	
-	public PayFineUI(PayFineControl control) {
+	public PayFineUi(PayFineControl control) {
 		this.control = control;
 		input = new Scanner(System.in);
 		state = UI_STATE.INITIALISED;
