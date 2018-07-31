@@ -14,7 +14,7 @@ public class FixBookUI {
 		this.control = control;
 		input = new Scanner(System.in);
 		state = UI_STATE.INITIALISED;
-		control.setUI(this);
+		control.setUi(this);
 	}
 
 
