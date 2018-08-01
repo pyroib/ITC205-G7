@@ -20,42 +20,42 @@ public class ReturnBookUi {
     public void run() {
         printOutput("Return Book Use Case UI\n");
         while (true) {
-            switch (state) {
-                case INITIALISED:
-                    break;
+          switch (state) {
+            case INITIALISED:
+              break;
 
-                case READY:
-                    String bookStr = getInput("Scan Book (<enter> completes): ");
-                    if (bookStr.length() == 0) {
-                      control.scanningComplete();
-                    } else {
-                      try {
-                        int bookId = Integer.valueOf(bookStr).intValue();
-                        control.bookScanned(bookId);
-                      } catch (NumberFormatException e) {
-                        printOutput("Invalid bookId");
-                      }
-                    }
-                    break;
-    
-                case INSPECTING:
-                    String answer = getInput("Is book damaged? (Y/N): ");
-                    boolean isDamaged = false;
-                    if (answer.toUpperCase().equals("Y")) {
-                      isDamaged = true;
-                    }
-                    control.dischargeLoan(isDamaged);
-                    break;
-                       
-                case COMPLETED:
-                    printOutput("Return processing complete");
-                    break;
-    
-                default:
-                    printOutput("Unhandled state");
-                    throw new RuntimeException("ReturnBookUI : unhandled state :" + state);
-            }
+            case READY:
+              String bookStr = getInput("Scan Book (<enter> completes): ");
+              if (bookStr.length() == 0) {
+                control.scanningComplete();
+              } else {
+                try {
+                  int bookId = Integer.valueOf(bookStr).intValue();
+              control.bookScanned(bookId);
+                } catch (NumberFormatException e) {
+                  printOutput("Invalid bookId");
+                }
+              }
+              break;
+
+            case INSPECTING:
+              String answer = getInput("Is book damaged? (Y/N): ");
+              boolean isDamaged = false;
+              if (answer.toUpperCase().equals("Y")) {
+                isDamaged = true;
+              }
+              control.dischargeLoan(isDamaged);
+              break;
+                   
+            case COMPLETED:
+              printOutput("Return processing complete");
+              break;
+
+            default:
+              printOutput("Unhandled state");
+              throw new RuntimeException("ReturnBookUI : unhandled state :" + state);
         }
+      }
     }
 
     
