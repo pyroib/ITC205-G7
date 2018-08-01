@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class ReturnBookUI {
+public class ReturnBookUi {
 
     public static enum UiState {
         INITIALISED, 
@@ -14,7 +14,7 @@ public class ReturnBookUI {
     private UiState state;
 
     
-    public ReturnBookUI(ReturnBookControl control) {
+    public ReturnBookUi(ReturnBookControl control) {
         this.control = control;
         input = new Scanner(System.in);
         state = UiState.INITIALISED;
