@@ -1,10 +1,7 @@
 public class ReturnBookControl {
     
-    
     private ReturnBookUI UI;
-
     private enum ControlState { INITIALISED, READY, INSPECTING };
-
     private ControlState state;
     private library library;
     private loan currentLoan;
@@ -17,7 +14,7 @@ public class ReturnBookControl {
     }
 
     
-    public void setUI(ReturnBookUI UI) {
+    public void setUi(ReturnBookUI UI) {
         if (!state.equals(ControlState.INITIALISED)) {
             throw new RuntimeException("ReturnBookControl: cannot call setUI "
                     + "except in INITIALISED state");
