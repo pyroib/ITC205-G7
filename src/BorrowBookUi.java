@@ -31,63 +31,63 @@ public class BorrowBookUi {
     }
 
     public void run() {
-        output("Borrow Book Use Case UI\n");
+        printOutput("Borrow Book Use Case UI\n");
         while (true) {
           switch (state) {
             case CANCELLED:
-              output("Borrowing Cancelled");
+              printOutput("Borrowing Cancelled");
               return;
             case READY:
-              String memberString = input("Swipe member card (press <enter> to cancel): ");
+              String memberString = getInput("Swipe member card (press <enter> to cancel): ");
               if (memberString.length() == 0) {
                 control.cancel();
                 break;
               }
               try {
-                int memberId = Integer.valueOf(memStr).intValue();
+                int memberId = Integer.valueOf(memberString).intValue();
                 control.swiped(memberId);
               } catch (NumberFormatException e) {
-                output("Invalid Member Id");
+                printOutput("Invalid Member Id");
               }
               break;
             case RESTRICTED:
-              input("Press <any key> to cancel");
+              getInput("Press <any key> to cancel");
               control.cancel();
               break;
             case SCANNING:
-              String bookString = input("Scan Book (<enter> completes): ");
+              String bookString = getInput("Scan Book (<enter> completes): ");
               if (bookString.length() == 0) {
                 control.complete();
                 break;
               }
               try {
-                int bookId = Integer.valueOf(bookStr).intValue();
+                int bookId = Integer.valueOf(bookString).intValue();
                 control.scanned(bookId);
               } catch (NumberFormatException e) {
-                output("Invalid Book Id");
+                printOutput("Invalid Book Id");
               }
               break;
             case FINALISING:
-              String answer = input("Commit loans? (Y/N): ");
+              String answer = getInput("Commit loans? (Y/N): ");
               if (answer.toUpperCase().equals("N")) {
                 control.cancel();
               } else {
                 control.commitLoans();
-                input("Press <any key> to complete ");
+                getInput("Press <any key> to complete ");
               }
               break;
             case COMPLETED:
-              output("Borrowing Completed");
+              printOutput("Borrowing Completed");
               return;
             default:
-              output("Unhandled state");
+              printOutput("Unhandled state");
               throw new RuntimeException("BorrowBookUi : unhandled state :" + state);
           }
         }
     }
 
     public void display(Object object) {
-        output(object);
+        printOutput(object);
     }
 
 }
