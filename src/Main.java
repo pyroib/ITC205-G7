@@ -125,7 +125,7 @@ public class Main {
 	}	
 
 		private static void payFine() {
-		new PayFineUI(new PayFineControl()).run();		
+		new PayFineUi(new PayFineControl()).run();		
 	}
 
 
