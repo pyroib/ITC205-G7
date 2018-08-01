@@ -2,12 +2,7 @@ import java.util.Scanner;
 
 public class ReturnBookUi {
 
-    public static enum UiState {
-        INITIALISED, 
-        READY, 
-        INSPECTING, 
-        COMPLETED
-    };
+    public static enum UiState { INITIALISED, READY, INSPECTING, COMPLETED };
 
     private ReturnBookControl control;
     private Scanner input;
@@ -24,25 +19,22 @@ public class ReturnBookUi {
     
     public void run() {
         printOutput("Return Book Use Case UI\n");
-
         while (true) {
-
             switch (state) {
-
                 case INITIALISED:
                     break;
 
                 case READY:
                     String bookStr = getInput("Scan Book (<enter> completes): ");
                     if (bookStr.length() == 0) {
-                        control.scanningComplete();
+                      control.scanningComplete();
                     } else {
-                        try {
-                            int bookId = Integer.valueOf(bookStr).intValue();
-                            control.bookScanned(bookId);
-                        } catch (NumberFormatException e) {
-                            printOutput("Invalid bookId");
-                        }
+                      try {
+                        int bookId = Integer.valueOf(bookStr).intValue();
+                        control.bookScanned(bookId);
+                      } catch (NumberFormatException e) {
+                        printOutput("Invalid bookId");
+                      }
                     }
                     break;
     
@@ -50,7 +42,7 @@ public class ReturnBookUi {
                     String answer = getInput("Is book damaged? (Y/N): ");
                     boolean isDamaged = false;
                     if (answer.toUpperCase().equals("Y")) {
-                        isDamaged = true;
+                      isDamaged = true;
                     }
                     control.dischargeLoan(isDamaged);
                     break;
