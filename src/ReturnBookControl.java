@@ -33,6 +33,7 @@ public class ReturnBookControl {
           throw new RuntimeException("ReturnBookControl: cannot call bookScanned except in READY "
                   + "state");
         }
+        
         book currentBook = library.Book(bookId);
         if (currentBook == null) {
           UI.displayOutput("Invalid Book Id");
@@ -67,6 +68,7 @@ public class ReturnBookControl {
           throw new RuntimeException("ReturnBookControl: cannot call scanningComplete except in "
                   + "READY state");
         }
+        
         UI.setState(ReturnBookUi.UiState.COMPLETED);
     }
 
@@ -76,6 +78,7 @@ public class ReturnBookControl {
           throw new RuntimeException("ReturnBookControl: cannot call dischargeLoan except in "
                   + "INSPECTING state");
         }
+        
         library.dischargeLoan(currentLoan, isDamaged);
         currentLoan = null;
         UI.setState(ReturnBookUi.UiState.READY);
