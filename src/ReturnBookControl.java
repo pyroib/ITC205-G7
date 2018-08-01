@@ -3,11 +3,7 @@ public class ReturnBookControl {
     
     private ReturnBookUI UI;
 
-    private enum ControlState {
-        INITIALISED, 
-        READY, 
-        INSPECTING
-    };
+    private enum ControlState { INITIALISED, READY, INSPECTING };
 
     private ControlState state;
     private library library;
