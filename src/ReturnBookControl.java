@@ -8,6 +8,7 @@ public class ReturnBookControl {
     private library library;
     private loan currentLoan;
   
+    
     @SuppressWarnings("static-access")
     public ReturnBookControl() {
         this.library = library.INSTANCE();
