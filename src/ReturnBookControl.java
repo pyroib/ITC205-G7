@@ -1,6 +1,6 @@
 public class ReturnBookControl {
 
-	private ReturnBookUI ui;
+	private ReturnBookUi ui;
 	private enum CONTROL_STATE { INITIALISED, READY, INSPECTING };
 	private CONTROL_STATE state;
 	
@@ -14,12 +14,12 @@ public class ReturnBookControl {
 	}
 	
 	
-	public void setUI(ReturnBookUI ui) {
+	public void setUI(ReturnBookUi ui) {
 		if (!state.equals(CONTROL_STATE.INITIALISED)) {
 			throw new RuntimeException("ReturnBookControl: cannot call setUI except in INITIALISED state");
 		}	
 		this.ui = ui;
-		ui.setState(ReturnBookUI.UiState.READY);
+		ui.setState(ReturnBookUi.UiState.READY);
 		state = CONTROL_STATE.READY;		
 	}
 
@@ -50,7 +50,7 @@ public class ReturnBookControl {
 		if (currentLoan.isOverDue()) {
 			ui.displayOutput(String.format("\nOverdue fine : $%.2f", overDueFine));
 		}
-		ui.setState(ReturnBookUI.UiState.INSPECTING);
+		ui.setState(ReturnBookUi.UiState.INSPECTING);
 		state = CONTROL_STATE.INSPECTING;		
 	}
 
@@ -59,7 +59,7 @@ public class ReturnBookControl {
 		if (!state.equals(CONTROL_STATE.READY)) {
 			throw new RuntimeException("ReturnBookControl: cannot call scanningComplete except in READY state");
 		}	
-		ui.setState(ReturnBookUI.UiState.COMPLETED);		
+		ui.setState(ReturnBookUi.UiState.COMPLETED);		
 	}
 
 
@@ -69,7 +69,7 @@ public class ReturnBookControl {
 		}	
 		library.dischargeLoan(currentLoan, isDamaged);
 		currentLoan = null;
-		ui.setState(ReturnBookUI.UiState.READY);
+		ui.setState(ReturnBookUi.UiState.READY);
 		state = CONTROL_STATE.READY;				
 	}
 
