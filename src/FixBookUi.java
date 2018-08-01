@@ -1,15 +1,15 @@
 import java.util.Scanner;
 
-
 public class FixBookUi {
 
-	public static enum UiState { INITIALISED, READY, FIXING, COMPLETED };
+	public static enum UiState {
+		INITIALISED, READY, FIXING, COMPLETED
+	};
 
 	private FixBookControl control;
 	private Scanner input;
 	private UiState state;
 
-	
 	public FixBookUi(FixBookControl control) {
 		this.control = control;
 		input = new Scanner(System.in);
@@ -17,70 +17,62 @@ public class FixBookUi {
 		control.setUi(this);
 	}
 
-
 	public void setState(UiState state) {
 		this.state = state;
 	}
 
-	
 	public void run() {
-		output("Fix Book Use Case UI\n");
-		
+		printOutput("Fix Book Use Case UI\n");
+
 		while (true) {
-			
+
 			switch (state) {
-			
+
 			case READY:
-				String bookStr = input("Scan Book (<enter> completes): ");
+				String bookStr = getUserInput("Scan Book (<enter> completes): ");
 				if (bookStr.length() == 0) {
 					control.scanningComplete();
-				}
-				else {
+				} else {
 					try {
 						int bookId = Integer.valueOf(bookStr).intValue();
 						control.bookScanned(bookId);
-					}
-					catch (NumberFormatException e) {
-						output("Invalid bookId");
+					} catch (NumberFormatException e) {
+						printOutput("Invalid bookId");
 					}
 				}
-				break;	
-				
+				break;
+
 			case FIXING:
-				String ans = input("Fix Book? (Y/N) : ");
+				String answer = getUserInput("Fix Book? (Y/N) : ");
 				boolean mustFix = false;
-				if (ans.toUpperCase().equals("Y")) {
+				if (answer.toUpperCase().equals("Y")) {
 					mustFix = true;
 				}
 				control.fixBook(mustFix);
 				break;
-								
+
 			case COMPLETED:
-				output("Fixing process complete");
+				printOutput("Fixing process complete");
 				return;
-			
+
 			default:
-				output("Unhandled state");
-				throw new RuntimeException("FixBookUI : unhandled state :" + state);			
-			}		
-		}	
+				printOutput("Unhandled state");
+				throw new RuntimeException("FixBookUI : unhandled state :" + state);
+			}
+		}
 	}
 
-	
-	private String input(String prompt) {
+	private String getUserInput(String prompt) {
 		System.out.print(prompt);
 		return input.nextLine();
-	}	
-		
-		
-	private void output(Object object) {
+	}
+
+	private void printOutput(Object object) {
 		System.out.println(object);
 	}
-	
 
 	public void display(Object object) {
-		output(object);
+		printOutput(object);
 	}
-	
-	
+
 }
