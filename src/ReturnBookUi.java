@@ -13,7 +13,7 @@ public class ReturnBookUi {
         this.control = control;
         input = new Scanner(System.in);
         state = UiState.INITIALISED;
-        control.setUI(this);
+        control.setUi(this);
     }
 
     
