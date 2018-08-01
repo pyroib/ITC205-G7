@@ -9,7 +9,7 @@ public class PayFineControl {
 	private ControlState state;
 
 	private library library;
-	private member member;;
+	private member member;
 
 	public PayFineControl() {
 		this.library = library.INSTANCE();
@@ -40,7 +40,7 @@ public class PayFineControl {
 		state = ControlState.PAYING;
 	}
 
-	public void cancel() {
+	public void cancelState() {
 		ui.setState(PayFineUi.UiState.CANCELLED);
 		state = ControlState.CANCELLED;
 	}

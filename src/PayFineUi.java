@@ -22,31 +22,31 @@ public class PayFineUi {
 	}
 
 	public void run() {
-		output("Pay Fine Use Case UI\n");
+		printOutput("Pay Fine Use Case UI\n");
 
 		while (true) {
 
 			switch (state) {
 
 			case READY:
-				String memberStr = input("Swipe member card (press <enter> to cancel): ");
+				String memberStr = userInput("Swipe member card (press <enter> to cancel): ");
 				if (memberStr.length() == 0) {
-					control.cancel();
+					control.cancelState();
 					break;
 				}
 				try {
 					int memberId = Integer.valueOf(memberStr).intValue();
 					control.cardSwiped(memberId);
 				} catch (NumberFormatException e) {
-					output("Invalid memberId");
+					printOutput("Invalid memberId");
 				}
 				break;
 
 			case PAYING:
 				double amount = 0;
-				String amountStr = input("Enter amount (<Enter> cancels) : ");
+				String amountStr = userInput("Enter amount (<Enter> cancels) : ");
 				if (amountStr.length() == 0) {
-					control.cancel();
+					control.cancelState();
 					break;
 				}
 				try {
@@ -54,38 +54,38 @@ public class PayFineUi {
 				} catch (NumberFormatException e) {
 				}
 				if (amount <= 0) {
-					output("Amount must be positive");
+					printOutput("Amount must be positive");
 					break;
 				}
 				control.payFine(amount);
 				break;
 
 			case CANCELLED:
-				output("Pay Fine process cancelled");
+				printOutput("Pay Fine process cancelled");
 				return;
 
 			case COMPLETED:
-				output("Pay Fine process complete");
+				printOutput("Pay Fine process complete");
 				return;
 
 			default:
-				output("Unhandled state");
+				printOutput("Unhandled state");
 				throw new RuntimeException("FixBookUI : unhandled state :" + state);
 			}
 		}
 	}
 
-	private String input(String prompt) {
+	private String userInput(String prompt) {
 		System.out.print(prompt);
 		return input.nextLine();
 	}
 
-	private void output(Object object) {
+	private void printOutput(Object object) {
 		System.out.println(object);
 	}
 
 	public void display(Object object) {
-		output(object);
+		printOutput(object);
 	}
 
 }
