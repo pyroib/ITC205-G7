@@ -14,7 +14,6 @@ public class Member implements Serializable {
   private int phoneNumber;
   private int ID;
   private double fines;
-
   private Map<Integer, loan> loans;
 
   
@@ -86,6 +85,7 @@ public class Member implements Serializable {
     }
   }
 
+  
   public String getLastName() {
     return lastName;
   }
@@ -95,6 +95,7 @@ public class Member implements Serializable {
     return firstName;
   }
 
+  
   public void addFine(double fine) {
     fines += fine;
   }
