@@ -8,7 +8,7 @@ public class FixBookControl {
 
 	private ControlState state;
 
-	private library library;
+	private Library library;
 	private book currentBook;
 
 	public FixBookControl() {

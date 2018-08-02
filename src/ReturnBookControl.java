@@ -5,7 +5,7 @@ public class ReturnBookControl {
         INITIALISED, READY, INSPECTING
     };
     private ControlState state;
-    private library library;
+    private Library library;
     private loan currentLoan;
   
     

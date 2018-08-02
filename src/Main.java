@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Main {
 	
 	private static Scanner IN;
-	private static library LIB;
+	private static Library LIB;
 	private static String MENU;
 	private static Calendar CAL;
 	private static SimpleDateFormat SDF;
@@ -44,7 +44,7 @@ public class Main {
 	public static void main(String[] args) {		
 		try {			
 			IN = new Scanner(System.in);
-			LIB = library.INSTANCE();
+			LIB = Library.INSTANCE();
 			CAL = Calendar.getInstance();
 			SDF = new SimpleDateFormat("dd/MM/yyyy");
 	
@@ -116,7 +116,7 @@ public class Main {
 					break;
 				}
 				
-				library.SAVE();
+				Library.SAVE();
 			}			
 		} catch (RuntimeException e) {
 			output(e);
