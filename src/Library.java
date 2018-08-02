@@ -52,7 +52,6 @@ public class Library implements Serializable {
       Path path = Paths.get(LIBRARY_FILE);
       if (Files.exists(path)) {
         try (ObjectInputStream lof = new ObjectInputStream(new FileInputStream(LIBRARY_FILE));) {
-
           self = (Library) lof.readObject();
           Calendar.getInstance().setDate(self.loadDate);
           lof.close();
@@ -124,14 +123,16 @@ public class Library implements Serializable {
   }
 
   public member getMember(int memberId) {
-    if (members.containsKey(memberId))
+    if (members.containsKey(memberId)) {
       return members.get(memberId);
+    }
     return null;
   }
 
   public book book(int bookId) {
-    if (catalog.containsKey(bookId))
+    if (catalog.containsKey(bookId)) {
       return catalog.get(bookId);
+    }
     return null;
   }
 
@@ -140,15 +141,19 @@ public class Library implements Serializable {
   }
 
   public boolean memberCanBorrow(member member) {
-    if (member.getNumberOfCurrentLoans() == LOAN_LIMIT)
+    if (member.getNumberOfCurrentLoans() == LOAN_LIMIT) {
       return false;
+    }
 
-    if (member.getFinesOwed() >= MAX_FINES_OWED)
+    if (member.getFinesOwed() >= MAX_FINES_OWED) {
       return false;
+    }
 
-    for (loan loan : member.getLoans())
-      if (loan.isOverDue())
+    for (loan loan : member.getLoans()) {
+      if (loan.isOverDue()) {
         return false;
+      }
+    }
 
     return true;
   }
