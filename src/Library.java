@@ -51,15 +51,16 @@ public class Library implements Serializable {
     if (self == null) {
       Path path = Paths.get(LIBRARY_FILE);
       if (Files.exists(path)) {
-        try (ObjectInputStream lof = new ObjectInputStream(new FileInputStream(LIBRARY_FILE));) {
-          self = (Library) lof.readObject();
+        try (ObjectInputStream objectOutputStream = new ObjectInputStream(new FileInputStream(LIBRARY_FILE));) {
+          self = (Library) objectOutputStream.readObject();
           Calendar.getInstance().setDate(self.loadDate);
-          lof.close();
+          objectOutputStream.close();
         } catch (Exception e) {
           throw new RuntimeException(e);
         }
-      } else
+      } else {
         self = new Library();
+      }
     }
     return self;
   }
@@ -68,10 +69,10 @@ public class Library implements Serializable {
   public static synchronized void save() {
     if (self != null) {
       self.loadDate = Calendar.getInstance().Date();
-      try (ObjectOutputStream lof = new ObjectOutputStream(new FileOutputStream(LIBRARY_FILE));) {
-        lof.writeObject(self);
-        lof.flush();
-        lof.close();
+      try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(LIBRARY_FILE));) {
+        objectOutputStream.writeObject(self);
+        objectOutputStream.flush();
+        objectOutputStream.close();
       } catch (Exception e) {
         throw new RuntimeException(e);
       }
@@ -120,16 +121,16 @@ public class Library implements Serializable {
 
   
   public member addMember(String lastName, String firstName, String email, int phoneNo) {
-    member member = new member(lastName, firstName, email, phoneNo, nextMemberId());
-    members.put(member.getId(), member);
-    return member;
+    member newMember = new member(lastName, firstName, email, phoneNo, nextMemberId());
+    members.put(newMember.getId(), newMember);
+    return newMember;
   }
 
   
   public book addBook(String a, String t, String c) {
-    book b = new book(a, t, c, nextBookId());
-    catalog.put(b.ID(), b);
-    return b;
+    book newBook = new book(a, t, c, nextBookId());
+    catalog.put(newBook.ID(), newBook);
+    return newBook;
   }
 
   
