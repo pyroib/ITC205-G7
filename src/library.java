@@ -28,11 +28,11 @@ public class library implements Serializable {
 	private int LID;
 	private Date loadDate;
 	
-	private Map<Integer, book> catalog;
+	private Map<Integer, Book> catalog;
 	private Map<Integer, member> members;
 	private Map<Integer, loan> loans;
 	private Map<Integer, loan> currentLoans;
-	private Map<Integer, book> damagedBooks;
+	private Map<Integer, Book> damagedBooks;
 	
 
 	private library() {
@@ -112,8 +112,8 @@ public class library implements Serializable {
 	}
 
 
-	public List<book> Books() {		
-		return new ArrayList<book>(catalog.values()); 
+	public List<Book> Books() {		
+		return new ArrayList<Book>(catalog.values()); 
 	}
 
 
@@ -129,8 +129,8 @@ public class library implements Serializable {
 	}
 
 	
-	public book Add_book(String a, String t, String c) {		
-		book b = new book(a, t, c, nextBID());
+	public Book Add_book(String a, String t, String c) {		
+		Book b = new Book(a, t, c, nextBID());
 		catalog.put(b.ID(), b);		
 		return b;
 	}
@@ -143,7 +143,7 @@ public class library implements Serializable {
 	}
 
 	
-	public book Book(int bookId) {
+	public Book Book(int bookId) {
 		if (catalog.containsKey(bookId)) 
 			return catalog.get(bookId);		
 		return null;
@@ -175,7 +175,7 @@ public class library implements Serializable {
 	}
 
 	
-	public loan issueLoan(book book, member member) {
+	public loan issueLoan(Book book, member member) {
 		Date dueDate = Calendar.getInstance().getDueDate(LOAN_PERIOD);
 		loan loan = new loan(nextLID(), book, member, dueDate);
 		member.takeOutLoan(loan);
@@ -206,7 +206,7 @@ public class library implements Serializable {
 
 	public void dischargeLoan(loan currentLoan, boolean isDamaged) {
 		member member = currentLoan.Member();
-		book book  = currentLoan.Book();
+		Book book  = currentLoan.Book();
 		
 		double overDueFine = calculateOverDueFine(currentLoan);
 		member.addFine(overDueFine);	
@@ -229,7 +229,7 @@ public class library implements Serializable {
 	}
 
 
-	public void repairBook(book currentBook) {
+	public void repairBook(Book currentBook) {
 		if (damagedBooks.containsKey(currentBook.ID())) {
 			currentBook.Repair();
 			damagedBooks.remove(currentBook.ID());

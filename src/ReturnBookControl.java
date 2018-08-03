@@ -34,7 +34,7 @@ public class ReturnBookControl {
                   + "state");
         }
         
-        book currentBook = library.Book(bookId);
+        Book currentBook = library.Book(bookId);
         if (currentBook == null) {
           UI.displayOutput("Invalid Book Id");
           return;

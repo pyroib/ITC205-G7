@@ -8,9 +8,9 @@ public class BorrowBookControl {
     private member member;
     private enum ControlState { INITIALISED, READY, RESTRICTED, SCANNING, IDENTIFIED, FINALISING, COMPLETED, CANCELLED };
     private ControlState state;
-    private List<book> pending;
+    private List<Book> pending;
     private List<loan> completed;
-    private book book;
+    private Book book;
     
     
     public BorrowBookControl() {
@@ -64,7 +64,7 @@ public class BorrowBookControl {
           return;
         }
         pending.add(book);
-        for (book book : pending) {
+        for (Book book : pending) {
           ui.display(book.toString());
         }
         if (library.loansRemainingForMember(member) - pending.size() == 0) {
@@ -79,7 +79,7 @@ public class BorrowBookControl {
           cancel();
         } else {
           ui.display("\nFinal Borrowing List");
-          for (book book : pending) {
+          for (Book book : pending) {
             ui.display(book.toString());
           }
           completed = new ArrayList<loan>();
@@ -93,7 +93,7 @@ public class BorrowBookControl {
         if (!state.equals(ControlState.FINALISING)) {
           throw new RuntimeException("BorrowBookControl: cannot call commitLoans except in FINALISING state");
         }    
-        for (book book : pending) {
+        for (Book book : pending) {
           loan loan = library.issueLoan(book, member);
           completed.add(loan);            
         }

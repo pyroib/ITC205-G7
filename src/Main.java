@@ -52,7 +52,7 @@ public class Main {
 				output(m);
 			}
 			output(" ");
-			for (book b : LIB.Books()) {
+			for (Book b : LIB.Books()) {
 				output(b);
 			}
 						
@@ -140,7 +140,7 @@ public class Main {
 
 	private static void listBooks() {
 		output("");
-		for (book book : LIB.Books()) {
+		for (Book book : LIB.Books()) {
 			output(book + "\n");
 		}		
 	}
@@ -189,7 +189,7 @@ public class Main {
 		String author = input("Enter author: ");
 		String title  = input("Enter title: ");
 		String callNo = input("Enter call number: ");
-		book book = LIB.Add_book(author, title, callNo);
+		Book book = LIB.Add_book(author, title, callNo);
 		output("\n" + book + "\n");
 		
 	}

@@ -9,7 +9,7 @@ public class FixBookControl {
 	private ControlState state;
 
 	private library library;
-	private book currentBook;
+	private Book currentBook;
 
 	public FixBookControl() {
 		this.library = library.INSTANCE();
