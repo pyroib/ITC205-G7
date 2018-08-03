@@ -131,7 +131,7 @@ public class library implements Serializable {
 	
 	public Book Add_book(String a, String t, String c) {		
 		Book b = new Book(a, t, c, nextBID());
-		catalog.put(b.ID(), b);		
+		catalog.put(b.getId(), b);		
 		return b;
 	}
 
@@ -179,9 +179,9 @@ public class library implements Serializable {
 		Date dueDate = Calendar.getInstance().getDueDate(LOAN_PERIOD);
 		loan loan = new loan(nextLID(), book, member, dueDate);
 		member.takeOutLoan(loan);
-		book.Borrow();
+		book.borrow();
 		loans.put(loan.getId(), loan);
-		currentLoans.put(book.ID(), loan);
+		currentLoans.put(book.getId(), loan);
 		return loan;
 	}
 	
@@ -212,13 +212,13 @@ public class library implements Serializable {
 		member.addFine(overDueFine);	
 		
 		member.dischargeLoan(currentLoan);
-		book.Return(isDamaged);
+		book.returned(isDamaged);
 		if (isDamaged) {
 			member.addFine(DAMAGE_FEE);
-			damagedBooks.put(book.ID(), book);
+			damagedBooks.put(book.getId(), book);
 		}
 		currentLoan.Loan();
-		currentLoans.remove(book.ID());
+		currentLoans.remove(book.getId());
 	}
 
 
@@ -230,9 +230,9 @@ public class library implements Serializable {
 
 
 	public void repairBook(Book currentBook) {
-		if (damagedBooks.containsKey(currentBook.ID())) {
-			currentBook.Repair();
-			damagedBooks.remove(currentBook.ID());
+		if (damagedBooks.containsKey(currentBook.getId())) {
+			currentBook.repair();
+			damagedBooks.remove(currentBook.getId());
 		}
 		else {
 			throw new RuntimeException("Library: repairBook: book is not damaged");
