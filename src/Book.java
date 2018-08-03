@@ -19,6 +19,7 @@ public class Book implements Serializable {
         this.state = State.AVAILABLE;
     }
 
+    
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Book: ").append(id).append("\n")
@@ -29,26 +30,32 @@ public class Book implements Serializable {
         return sb.toString();
     }
 
+    
     public Integer getId() {
         return id;
     }
 
+    
     public String getTitle() {
         return title;
     }
 
+    
     public boolean available() {
         return state == State.AVAILABLE;
     }
 
+    
     public boolean onLoan() {
         return state == State.ON_LOAN;
     }
 
+    
     public boolean damaged() {
         return state == State.DAMAGED;
     }
 
+    
     public void borrow() {
         if (state.equals(State.AVAILABLE)) {
           state = State.ON_LOAN;
@@ -57,6 +64,7 @@ public class Book implements Serializable {
         }
     }
 
+    
     public void returned(boolean DAMAGED) {
         if (state.equals(State.ON_LOAN)) {
           if (DAMAGED) {
@@ -69,6 +77,7 @@ public class Book implements Serializable {
         }
     }
 
+    
     public void repair() {
         if (state.equals(State.DAMAGED)) {
           state = State.AVAILABLE;
@@ -77,4 +86,5 @@ public class Book implements Serializable {
         }
     }
 
+    
 }
