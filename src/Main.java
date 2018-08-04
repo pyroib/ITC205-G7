@@ -2,10 +2,10 @@ import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 /*
- * James Tulip: not - sure - but classes start with caps, and variables 
- * and methods start with lower case - new words concatenated start 
- * with caps
- */
+*ITC205 Asg2 - Group7 (Jasemine, Ian, Meraj)
+*/
+
+
 public class Main {
 	
 	private static Scanner IN;
@@ -15,29 +15,29 @@ public class Main {
 	private static SimpleDateFormat SDF;
 	
 	
-	private static String Get_menu() {
-		StringBuilder sb = new StringBuilder();
+	private static String getMenu() {
+		StringBuilder stringBuilder = new StringBuilder();
 		
-		sb.append("\nLibrary Main Menu\n\n")
-		  .append("  M  : add member\n")
-		  .append("  LM : list members\n")
+		stringBuilder.append("\nLibrary Main Menu\n\n")
+		  .append("  M  : Add member\n")
+		  .append("  LM : List members\n")
 		  .append("\n")
-		  .append("  B  : add book\n")
-		  .append("  LB : list books\n")
-		  .append("  FB : fix books\n")
+		  .append("  B  : Add book\n")
+		  .append("  LB : List books\n")
+		  .append("  FB : Fix books\n")
 		  .append("\n")
-		  .append("  L  : take out a loan\n")
-		  .append("  R  : return a loan\n")
-		  .append("  LL : list loans\n")
+		  .append("  L  : Take out a loan\n")
+		  .append("  R  : Return a loan\n")
+		  .append("  LL : List loans\n")
 		  .append("\n")
-		  .append("  P  : pay fine\n")
+		  .append("  P  : Pay fine\n")
 		  .append("\n")
-		  .append("  T  : increment date\n")
-		  .append("  Q  : quit\n")
+		  .append("  T  : Increment date\n")
+		  .append("  Q  : Quit\n")
 		  .append("\n")
-		  .append("Choice : ");
+		  .append("Please enter you choice : ");
 		  
-		return sb.toString();
+		return stringBuilder.toString();
 	}
 
 
@@ -48,24 +48,24 @@ public class Main {
 			CAL = Calendar.getInstance();
 			SDF = new SimpleDateFormat("dd/MM/yyyy");
 	
-			for (member m : LIB.Members()) {
-				output(m);
+			for (member member : LIB.Members()) {
+				output(member);
 			}
 			output(" ");
-			for (book b : LIB.Books()) {
-				output(b);
+			for (book book : LIB.Books()) {
+				output(book);
 			}
 						
-			MENU = Get_menu();
+			MENU = getMenu();
 			
-			boolean e = false;
+			boolean userSelection = false;
 			
-			while (!e) {
+			while (!userSelection) {
 				
 				output("\n" + SDF.format(CAL.Date()));
-				String c = input(MENU);
+				String userEntry = input(MENU);
 				
-				switch (c.toUpperCase()) {
+				switch (userEntry.toUpperCase()) {
 				
 				case "M": 
 					addMember();
@@ -108,7 +108,7 @@ public class Main {
 					break;
 					
 				case "Q": 
-					e = true;
+					userSelection = true;
 					break;
 					
 				default: 
