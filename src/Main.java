@@ -2,7 +2,7 @@ import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 /*
-*ITC205 Asg2 - Group7 (Jasemine, Ian, Meraj)
+*ITC205 Asg2 - Group7 (Jasmine, Ian, Meraj)
 */
 
 public class Main {
