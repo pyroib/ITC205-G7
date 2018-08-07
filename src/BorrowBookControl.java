@@ -4,8 +4,10 @@ import java.util.List;
 public class BorrowBookControl {
     
     private BorrowBookUi ui;
-    private library library;
-    private member member;
+
+    private Library library;
+    private Member member;
+    
     private enum ControlState { INITIALISED, READY, RESTRICTED, SCANNING, IDENTIFIED, FINALISING, COMPLETED, CANCELLED };
     private ControlState state;
     private List<Book> pending;
@@ -54,12 +56,12 @@ public class BorrowBookControl {
         if (!state.equals(ControlState.SCANNING)) {
           throw new RuntimeException("BorrowBookControl: cannot call bookScanned except in SCANNING state");
         }    
-        book = library.Book(bookId);
+        book = library.book(bookId);
         if (book == null) {
           ui.display("Invalid bookId");
           return;
         }
-        if (!book.available()) {
+        if (!book.isAvailable()) {
           ui.display("Book cannot be borrowed");
           return;
         }

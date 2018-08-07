@@ -41,7 +41,7 @@ public class Book implements Serializable {
     }
 
     
-    public boolean available() {
+    public boolean isAvailable() {
         return state == State.AVAILABLE;
     }
 
@@ -51,7 +51,7 @@ public class Book implements Serializable {
     }
 
     
-    public boolean damaged() {
+    public boolean isDamaged() {
         return state == State.DAMAGED;
     }
 

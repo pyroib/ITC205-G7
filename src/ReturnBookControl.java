@@ -5,7 +5,7 @@ public class ReturnBookControl {
         INITIALISED, READY, INSPECTING
     };
     private ControlState state;
-    private library library;
+    private Library library;
     private loan currentLoan;
   
     
@@ -34,7 +34,7 @@ public class ReturnBookControl {
                   + "state");
         }
         
-        Book currentBook = library.Book(bookId);
+        Book currentBook = library.book(bookId);
         if (currentBook == null) {
           UI.displayOutput("Invalid Book Id");
           return;

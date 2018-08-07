@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Main {
 	
 	private static Scanner IN;
-	private static library LIB;
+	private static Library LIB;
 	private static String MENU;
 	private static Calendar CAL;
 	private static SimpleDateFormat SDF;
@@ -44,15 +44,16 @@ public class Main {
 	public static void main(String[] args) {		
 		try {			
 			IN = new Scanner(System.in);
-			LIB = library.INSTANCE();
+			LIB = Library.INSTANCE();
 			CAL = Calendar.getInstance();
 			SDF = new SimpleDateFormat("dd/MM/yyyy");
-	
-			for (member m : LIB.Members()) {
+
+			for (Member m : LIB.members()) {
 				output(m);
 			}
 			output(" ");
-			for (Book b : LIB.Books()) {
+			for (Book b : LIB.books()) {
+
 				output(b);
 			}
 						
@@ -116,7 +117,7 @@ public class Main {
 					break;
 				}
 				
-				library.SAVE();
+				Library.save();
 			}			
 		} catch (RuntimeException e) {
 			output(e);
@@ -131,7 +132,7 @@ public class Main {
 
 	private static void listCurrentLoans() {
 		output("");
-		for (loan loan : LIB.CurrentLoans()) {
+		for (loan loan : LIB.currentLoans()) {
 			output(loan + "\n");
 		}		
 	}
@@ -140,7 +141,9 @@ public class Main {
 
 	private static void listBooks() {
 		output("");
-		for (Book book : LIB.Books()) {
+
+		for (Book book : LIB.books()) {
+
 			output(book + "\n");
 		}		
 	}
@@ -149,7 +152,7 @@ public class Main {
 
 	private static void listMembers() {
 		output("");
-		for (member member : LIB.Members()) {
+		for (Member member : LIB.members()) {
 			output(member + "\n");
 		}		
 	}
@@ -189,7 +192,7 @@ public class Main {
 		String author = input("Enter author: ");
 		String title  = input("Enter title: ");
 		String callNo = input("Enter call number: ");
-		Book book = LIB.Add_book(author, title, callNo);
+		Book book = LIB.addBook(author, title, callNo);
 		output("\n" + book + "\n");
 		
 	}
@@ -201,7 +204,7 @@ public class Main {
 			String firstName  = input("Enter first name: ");
 			String email = input("Enter email: ");
 			int phoneNo = Integer.valueOf(input("Enter phone number: ")).intValue();
-			member member = LIB.Add_mem(lastName, firstName, email, phoneNo);
+			Member member = LIB.addMember(lastName, firstName, email, phoneNo);
 			output("\n" + member + "\n");
 			
 		} catch (NumberFormatException e) {
