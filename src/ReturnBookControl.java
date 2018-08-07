@@ -1,12 +1,14 @@
 public class ReturnBookControl {
     
     private ReturnBookUi UI;
-    private enum ControlState {
-        INITIALISED, READY, INSPECTING
-    };
+    private enum ControlState {INITIALISED, READY, INSPECTING};
+    
     private ControlState state;
-    private library library;
+
     private Loan currentLoan;
+
+    private Library library;
+
   
     
     @SuppressWarnings("static-access")
@@ -34,7 +36,7 @@ public class ReturnBookControl {
                   + "state");
         }
         
-        book currentBook = library.Book(bookId);
+        book currentBook = library.book(bookId);
         if (currentBook == null) {
           UI.displayOutput("Invalid Book Id");
           return;
