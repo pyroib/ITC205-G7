@@ -1,12 +1,14 @@
 public class ReturnBookControl {
     
     private ReturnBookUi UI;
-    private enum ControlState {
-        INITIALISED, READY, INSPECTING
-    };
+    private enum ControlState {INITIALISED, READY, INSPECTING};
+    
     private ControlState state;
+
+    private Loan currentLoan;
+
     private Library library;
-    private loan currentLoan;
+
   
     
     @SuppressWarnings("static-access")
