@@ -7,9 +7,10 @@ public class PayFineControl {
 	};
 
 	private ControlState state;
-	private library library;
-	private member member;
+	private Library library;
+	private Member member;
 
+	
 	public PayFineControl() {
 		this.library = library.INSTANCE();
 		state = ControlState.INITIALISED;
@@ -24,6 +25,7 @@ public class PayFineControl {
 		state = ControlState.READY;
 	}
 
+	
 	public void cardSwiped(int memberId) {
 		if (!state.equals(ControlState.READY)) {
 			throw new RuntimeException("PayFineControl: cannot call cardSwiped except in READY state");
@@ -39,11 +41,13 @@ public class PayFineControl {
 		state = ControlState.PAYING;
 	}
 
+	
 	public void cancelState() {
 		ui.setState(PayFineUi.UiState.CANCELLED);
 		state = ControlState.CANCELLED;
 	}
 
+	
 	public double payFine(double amount) {
 		if (!state.equals(ControlState.PAYING)) {
 			throw new RuntimeException("PayFineControl: cannot call payFine except in PAYING state");
@@ -58,4 +62,5 @@ public class PayFineControl {
 		return change;
 	}
 
+	
 }
