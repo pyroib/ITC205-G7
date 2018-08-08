@@ -9,7 +9,7 @@ public class FixBookControl {
 	private ControlState state;
 
 	private Library library;
-	private book currentBook;
+	private Book currentBook;
 
 	public FixBookControl() {
 		this.library = library.INSTANCE();
@@ -35,7 +35,7 @@ public class FixBookControl {
 			ui.display("Invalid bookId");
 			return;
 		}
-		if (!currentBook.Damaged()) {
+		if (!currentBook.isDamaged()) {
 			ui.display("\"Book has not been damaged");
 			return;
 		}

@@ -50,7 +50,7 @@ public class Main {
 				memberOutput(member);
 			}
 			memberOutput(" ");
-			for (book book : library.books()) {
+			for (Book book : library.books()) {
 				memberOutput(book);
 			}
 
@@ -60,7 +60,7 @@ public class Main {
 
 			while (!userSelection) {
 
-				memberOutput("\n" + simpleDateFormat.format(calender.Date()));
+				memberOutput("\n" + simpleDateFormat.format(calender.setDate()));
 				String userEntry = memberInput(menu);
 
 				switch (userEntry.toUpperCase()) {
@@ -138,7 +138,7 @@ public class Main {
 	
 	private static void listBooks() {
 		memberOutput("");
-		for (book book : library.books()) {
+		for (Book book : library.books()) {
 			memberOutput(book + "\n");
 		}
 	}
@@ -172,7 +172,7 @@ public class Main {
 			int days = Integer.valueOf(memberInput("Enter number of days: ")).intValue();
 			calender.incrementDate(days);
 			library.checkCurrentLoans();
-			memberOutput(simpleDateFormat.format(calender.Date()));
+			memberOutput(simpleDateFormat.format(calender.setDate()));
 
 		} catch (NumberFormatException e) {
 			memberOutput("\nInvalid number of days\n");
@@ -185,7 +185,7 @@ public class Main {
 		String author = memberInput("Enter author: ");
 		String title = memberInput("Enter title: ");
 		String callNo = memberInput("Enter call number: ");
-		book book = library.addBook(author, title, callNo);
+		Book book = library.addBook(author, title, callNo);
 		memberOutput("\n" + book + "\n");
 
 	}
