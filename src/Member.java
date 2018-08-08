@@ -14,7 +14,7 @@ public class Member implements Serializable {
   private int phoneNumber;
   private int ID;
   private double fines;
-  private Map<Integer, PayLoan> loans;
+  private Map<Integer, Loan> loans;
 
   
   public Member(String lastName, String firstName, String email, int phoneNumber, int ID) {
@@ -47,7 +47,7 @@ public class Member implements Serializable {
                 .append(String.format("  Fines Owed :  $%.2f", fines))
                 .append("\n");
 
-    for (PayLoan loan : loans.values()) {
+    for (Loan loan : loans.values()) {
       stringBuilder.append(loan).append("\n");
     }
     return stringBuilder.toString();
@@ -59,8 +59,8 @@ public class Member implements Serializable {
   }
 
   
-  public List<PayLoan> getLoans() {
-    List<PayLoan> loansList = new ArrayList<PayLoan>(loans.values()); 
+  public List<Loan> getLoans() {
+    List<Loan> loansList = new ArrayList<Loan>(loans.values()); 
     return loansList;
   }
 
@@ -75,7 +75,7 @@ public class Member implements Serializable {
   }
 
   
-  public void takeOutLoan(PayLoan loan) {
+  public void takeOutLoan(Loan loan) {
     int loanId = loan.getId();
     boolean loanExists = loans.containsKey(loanId);
     if (!loanExists) {
@@ -116,7 +116,7 @@ public class Member implements Serializable {
   }
 
   
-  public void dischargeLoan(PayLoan loan) {
+  public void dischargeLoan(Loan loan) {
     int loanId = loan.getId();
     boolean loanExists = loans.containsKey(loanId);
     if (loanExists) {

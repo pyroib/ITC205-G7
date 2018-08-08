@@ -11,7 +11,7 @@ public class BorrowBookControl {
     private enum ControlState { INITIALISED, READY, RESTRICTED, SCANNING, IDENTIFIED, FINALISING, COMPLETED, CANCELLED };
     private ControlState state;
     private List<book> pending;
-    private List<PayLoan> completed;
+    private List<Loan> completed;
     private book book;
     
     
@@ -84,7 +84,7 @@ public class BorrowBookControl {
           for (book book : pending) {
             ui.display(book.toString());
           }
-          completed = new ArrayList<PayLoan>();
+          completed = new ArrayList<Loan>();
           ui.setState(BorrowBookUi.UiState.FINALISING);
           state = ControlState.FINALISING;
         }
@@ -96,11 +96,11 @@ public class BorrowBookControl {
           throw new RuntimeException("BorrowBookControl: cannot call commitLoans except in FINALISING state");
         }    
         for (book book : pending) {
-          PayLoan loan = library.issueLoan(book, member);
+          Loan loan = library.issueLoan(book, member);
           completed.add(loan);            
         }
         ui.display("Completed Loan Slip");
-        for (PayLoan loan : completed) {
+        for (Loan loan : completed) {
           ui.display(loan.toString());
         }
         ui.setState(BorrowBookUi.UiState.COMPLETED);
