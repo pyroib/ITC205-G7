@@ -91,7 +91,8 @@ public class Book implements Serializable {
         if (bookState.equals(BookState.DAMAGED)) {
           bookState = BookState.AVAILABLE;
         } else {
-          throw new RuntimeException(String.format("Book: cannot repair while book is in state: %s", bookState));
+          String exceptionString = String.format("Book: cannot repair while book is in state: %s", bookState);
+          throw new RuntimeException(exceptionString);
         }
     }
 
