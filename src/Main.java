@@ -38,6 +38,7 @@ public class Main {
 		return stringBuilder.toString();
 	}
 
+	
 	public static void main(String[] args) {
 		try {
 			userInput = new Scanner(System.in);
@@ -121,10 +122,12 @@ public class Main {
 		output("\nEnded\n");
 	}
 
+	
 	private static void payFine() {
 		new PayFineUi(new PayFineControl()).run();
 	}
 
+	
 	private static void listCurrentLoans() {
 		output("");
 		for (loan loan : library.currentLoans()) {
@@ -132,6 +135,7 @@ public class Main {
 		}
 	}
 
+	
 	private static void listBooks() {
 		output("");
 		for (book book : library.books()) {
@@ -139,6 +143,7 @@ public class Main {
 		}
 	}
 
+	
 	private static void listMembers() {
 		output("");
 		for (Member member : library.members()) {
@@ -146,18 +151,22 @@ public class Main {
 		}
 	}
 
+	
 	private static void borrowBook() {
 		new BorrowBookUi(new BorrowBookControl()).run();
 	}
 
+	
 	private static void returnBook() {
 		new ReturnBookUi(new ReturnBookControl()).run();
 	}
 
+	
 	private static void fixBooks() {
 		new FixBookUi(new FixBookControl()).run();
 	}
 
+	
 	private static void incrementDate() {
 		try {
 			int days = Integer.valueOf(input("Enter number of days: ")).intValue();
@@ -170,6 +179,7 @@ public class Main {
 		}
 	}
 
+	
 	private static void addBook() {
 
 		String author = input("Enter author: ");
@@ -180,6 +190,7 @@ public class Main {
 
 	}
 
+	
 	private static void addMember() {
 		try {
 			String lastName = input("Enter last name: ");
@@ -195,13 +206,17 @@ public class Main {
 
 	}
 
+	
 	private static String input(String prompt) {
 		System.out.print(prompt);
 		return userInput.nextLine();
 	}
 
+	
 	private static void output(Object object) {
 		System.out.println(object);
 	}
 
+	
 }
+
