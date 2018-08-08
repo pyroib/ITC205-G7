@@ -34,13 +34,13 @@ public class ReturnBookControl {
                   + "state");
         }
         
-        book currentBook = library.book(bookId);
+        Book currentBook = library.book(bookId);
         if (currentBook == null) {
           UI.displayOutput("Invalid Book Id");
           return;
         }
         
-        if (!currentBook.On_loan()) {
+        if (!currentBook.onLoan()) {
           UI.displayOutput("Book has not been borrowed");
           return;
         }
