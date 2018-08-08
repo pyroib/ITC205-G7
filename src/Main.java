@@ -47,11 +47,11 @@ public class Main {
 			simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 			for (Member member : library.members()) {
-				output(member);
+				memberOutput(member);
 			}
-			output(" ");
+			memberOutput(" ");
 			for (book book : library.books()) {
-				output(book);
+				memberOutput(book);
 			}
 
 			menu = getMenu();
@@ -60,8 +60,8 @@ public class Main {
 
 			while (!userSelection) {
 
-				output("\n" + simpleDateFormat.format(calender.Date()));
-				String userEntry = input(menu);
+				memberOutput("\n" + simpleDateFormat.format(calender.Date()));
+				String userEntry = memberInput(menu);
 
 				switch (userEntry.toUpperCase()) {
 
@@ -110,16 +110,16 @@ public class Main {
 					break;
 
 				default:
-					output("\nInvalid option\n");
+					memberOutput("\nInvalid option\n");
 					break;
 				}
 
 				Library.save();
 			}
 		} catch (RuntimeException e) {
-			output(e);
+			memberOutput(e);
 		}
-		output("\nEnded\n");
+		memberOutput("\nEnded\n");
 	}
 
 	
@@ -129,25 +129,25 @@ public class Main {
 
 	
 	private static void listCurrentLoans() {
-		output("");
+		memberOutput("");
 		for (loan loan : library.currentLoans()) {
-			output(loan + "\n");
+			memberOutput(loan + "\n");
 		}
 	}
 
 	
 	private static void listBooks() {
-		output("");
+		memberOutput("");
 		for (book book : library.books()) {
-			output(book + "\n");
+			memberOutput(book + "\n");
 		}
 	}
 
 	
 	private static void listMembers() {
-		output("");
+		memberOutput("");
 		for (Member member : library.members()) {
-			output(member + "\n");
+			memberOutput(member + "\n");
 		}
 	}
 
@@ -169,51 +169,51 @@ public class Main {
 	
 	private static void incrementDate() {
 		try {
-			int days = Integer.valueOf(input("Enter number of days: ")).intValue();
+			int days = Integer.valueOf(memberInput("Enter number of days: ")).intValue();
 			calender.incrementDate(days);
 			library.checkCurrentLoans();
-			output(simpleDateFormat.format(calender.Date()));
+			memberOutput(simpleDateFormat.format(calender.Date()));
 
 		} catch (NumberFormatException e) {
-			output("\nInvalid number of days\n");
+			memberOutput("\nInvalid number of days\n");
 		}
 	}
 
 	
 	private static void addBook() {
 
-		String author = input("Enter author: ");
-		String title = input("Enter title: ");
-		String callNo = input("Enter call number: ");
+		String author = memberInput("Enter author: ");
+		String title = memberInput("Enter title: ");
+		String callNo = memberInput("Enter call number: ");
 		book book = library.addBook(author, title, callNo);
-		output("\n" + book + "\n");
+		memberOutput("\n" + book + "\n");
 
 	}
 
 	
 	private static void addMember() {
 		try {
-			String lastName = input("Enter last name: ");
-			String firstName = input("Enter first name: ");
-			String email = input("Enter email: ");
-			int phoneNo = Integer.valueOf(input("Enter phone number: ")).intValue();
+			String lastName = memberInput("Enter last name: ");
+			String firstName = memberInput("Enter first name: ");
+			String email = memberInput("Enter email: ");
+			int phoneNo = Integer.valueOf(memberInput("Enter phone number: ")).intValue();
 			Member member = library.addMember(lastName, firstName, email, phoneNo);
-			output("\n" + member + "\n");
+			memberOutput("\n" + member + "\n");
 
 		} catch (NumberFormatException e) {
-			output("\nInvalid phone number\n");
+			memberOutput("\nInvalid phone number\n");
 		}
 
 	}
 
 	
-	private static String input(String prompt) {
+	private static String memberInput(String prompt) {
 		System.out.print(prompt);
 		return userInput.nextLine();
 	}
 
 	
-	private static void output(Object object) {
+	private static void memberOutput(Object object) {
 		System.out.println(object);
 	}
 
