@@ -7,11 +7,11 @@ import java.util.Scanner;
 
 public class Main {
 
-	private static Scanner IN;
-	private static Library LIB;
-	private static String MENU;
-	private static Calendar CAL;
-	private static SimpleDateFormat SDF;
+	private static Scanner userInput;
+	private static Library library;
+	private static String menu;
+	private static Calendar calender;
+	private static SimpleDateFormat simpleDateFormat;
 
 	private static String getMenu() {
 		StringBuilder stringBuilder = new StringBuilder();
@@ -40,27 +40,27 @@ public class Main {
 
 	public static void main(String[] args) {
 		try {
-			IN = new Scanner(System.in);
-			LIB = Library.INSTANCE();
-			CAL = Calendar.getInstance();
-			SDF = new SimpleDateFormat("dd/MM/yyyy");
+			userInput = new Scanner(System.in);
+			library = Library.INSTANCE();
+			calender = Calendar.getInstance();
+			simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-			for (Member member : LIB.members()) {
+			for (Member member : library.members()) {
 				output(member);
 			}
 			output(" ");
-			for (book book : LIB.books()) {
+			for (book book : library.books()) {
 				output(book);
 			}
 
-			MENU = getMenu();
+			menu = getMenu();
 
 			boolean userSelection = false;
 
 			while (!userSelection) {
 
-				output("\n" + SDF.format(CAL.Date()));
-				String userEntry = input(MENU);
+				output("\n" + simpleDateFormat.format(calender.Date()));
+				String userEntry = input(menu);
 
 				switch (userEntry.toUpperCase()) {
 
@@ -127,21 +127,21 @@ public class Main {
 
 	private static void listCurrentLoans() {
 		output("");
-		for (loan loan : LIB.currentLoans()) {
+		for (loan loan : library.currentLoans()) {
 			output(loan + "\n");
 		}
 	}
 
 	private static void listBooks() {
 		output("");
-		for (book book : LIB.books()) {
+		for (book book : library.books()) {
 			output(book + "\n");
 		}
 	}
 
 	private static void listMembers() {
 		output("");
-		for (Member member : LIB.members()) {
+		for (Member member : library.members()) {
 			output(member + "\n");
 		}
 	}
@@ -161,9 +161,9 @@ public class Main {
 	private static void incrementDate() {
 		try {
 			int days = Integer.valueOf(input("Enter number of days: ")).intValue();
-			CAL.incrementDate(days);
-			LIB.checkCurrentLoans();
-			output(SDF.format(CAL.Date()));
+			calender.incrementDate(days);
+			library.checkCurrentLoans();
+			output(simpleDateFormat.format(calender.Date()));
 
 		} catch (NumberFormatException e) {
 			output("\nInvalid number of days\n");
@@ -175,7 +175,7 @@ public class Main {
 		String author = input("Enter author: ");
 		String title = input("Enter title: ");
 		String callNo = input("Enter call number: ");
-		book book = LIB.addBook(author, title, callNo);
+		book book = library.addBook(author, title, callNo);
 		output("\n" + book + "\n");
 
 	}
@@ -186,7 +186,7 @@ public class Main {
 			String firstName = input("Enter first name: ");
 			String email = input("Enter email: ");
 			int phoneNo = Integer.valueOf(input("Enter phone number: ")).intValue();
-			Member member = LIB.addMember(lastName, firstName, email, phoneNo);
+			Member member = library.addMember(lastName, firstName, email, phoneNo);
 			output("\n" + member + "\n");
 
 		} catch (NumberFormatException e) {
@@ -197,7 +197,7 @@ public class Main {
 
 	private static String input(String prompt) {
 		System.out.print(prompt);
-		return IN.nextLine();
+		return userInput.nextLine();
 	}
 
 	private static void output(Object object) {
