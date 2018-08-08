@@ -84,7 +84,7 @@ public class Loan implements Serializable {
 	}
 
 
-	public void Loan() {
+	public void updateLoan() {
 		state = LoanState.DISCHARGED;		
 	}
 
