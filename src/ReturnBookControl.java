@@ -6,7 +6,7 @@ public class ReturnBookControl {
     };
     private ControlState state;
     private Library library;
-    private loan currentLoan;
+    private PayLoan currentLoan;
   
     
     @SuppressWarnings("static-access")

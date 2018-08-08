@@ -30,8 +30,8 @@ public class Library implements Serializable {
 
   private Map<Integer, book> catalog;
   private Map<Integer, Member> members;
-  private Map<Integer, loan> loans;
-  private Map<Integer, loan> currentLoans;
+  private Map<Integer, PayLoan> loans;
+  private Map<Integer, PayLoan> currentLoans;
   private Map<Integer, book> damagedBooks;
 
   
@@ -115,8 +115,8 @@ public class Library implements Serializable {
   }
 
   
-  public List<loan> currentLoans() {
-    return new ArrayList<loan>(currentLoans.values());
+  public List<PayLoan> currentLoans() {
+    return new ArrayList<PayLoan>(currentLoans.values());
   }
 
   
@@ -164,7 +164,7 @@ public class Library implements Serializable {
       return false;
     }
 
-    for (loan loan : member.getLoans()) {
+    for (PayLoan loan : member.getLoans()) {
       if (loan.isOverDue()) {
         return false;
       }
@@ -179,9 +179,9 @@ public class Library implements Serializable {
   }
 
   
-  public loan issueLoan(book book, Member member) {
+  public PayLoan issueLoan(book book, Member member) {
     Date dueDate = Calendar.getInstance().getDueDate(LOAN_PERIOD);
-    loan loan = new loan(nextLibraryId(), book, member, dueDate);
+    PayLoan loan = new PayLoan(nextLibraryId(), book, member, dueDate);
     member.takeOutLoan(loan);
     book.Borrow();
     loans.put(loan.getId(), loan);
@@ -190,7 +190,7 @@ public class Library implements Serializable {
   }
 
   
-  public loan getLoanByBookId(int bookId) {
+  public PayLoan getLoanByBookId(int bookId) {
     if (currentLoans.containsKey(bookId)) {
       return currentLoans.get(bookId);
     }
@@ -198,7 +198,7 @@ public class Library implements Serializable {
   }
 
   
-  public double calculateOverDueFine(loan loan) {
+  public double calculateOverDueFine(PayLoan loan) {
     if (loan.isOverDue()) {
       long daysOverDue = Calendar.getInstance().getDaysDifference(loan.getDueDate());
       double fine = daysOverDue * FINE_PER_DAY;
@@ -208,7 +208,7 @@ public class Library implements Serializable {
   }
 
   
-  public void dischargeLoan(loan currentLoan, boolean isDamaged) {
+  public void dischargeLoan(PayLoan currentLoan, boolean isDamaged) {
     Member member = currentLoan.Member();
     book book = currentLoan.Book();
 
@@ -226,7 +226,7 @@ public class Library implements Serializable {
 
   
   public void checkCurrentLoans() {
-    for (loan loan : currentLoans.values()) {
+    for (PayLoan loan : currentLoans.values()) {
       loan.checkOverDue();
     }
   }
