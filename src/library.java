@@ -13,232 +13,233 @@ import java.util.List;
 import java.util.Map;
 
 @SuppressWarnings("serial")
-public class library implements Serializable {
-	
-	private static final String LIBRARY_FILE = "library.obj";
-	private static final int LOAN_LIMIT = 2;
-	private static final int LOAN_PERIOD = 2;
-	private static final double FINE_PER_DAY = 1.0;
-	private static final double MAX_FINES_OWED = 5.0;
-	private static final double DAMAGE_FEE = 2.0;
-	
-	private static library self;
-	private int BID;
-	private int MID;
-	private int LID;
-	private Date loadDate;
-	
-	private Map<Integer, Book> catalog;
-	private Map<Integer, member> members;
-	private Map<Integer, loan> loans;
-	private Map<Integer, loan> currentLoans;
-	private Map<Integer, Book> damagedBooks;
-	
+public class Library implements Serializable {
 
-	private library() {
-		catalog = new HashMap<>();
-		members = new HashMap<>();
-		loans = new HashMap<>();
-		currentLoans = new HashMap<>();
-		damagedBooks = new HashMap<>();
-		BID = 1;
-		MID = 1;		
-		LID = 1;		
-	}
+  private static final String LIBRARY_FILE = "library.obj";
+  private static final int LOAN_LIMIT = 2;
+  private static final int LOAN_PERIOD = 2;
+  private static final double FINE_PER_DAY = 1.0;
+  private static final double MAX_FINES_OWED = 5.0;
+  private static final double DAMAGE_FEE = 2.0;
 
-	
-	public static synchronized library INSTANCE() {		
-		if (self == null) {
-			Path path = Paths.get(LIBRARY_FILE);			
-			if (Files.exists(path)) {	
-				try (ObjectInputStream lof = new ObjectInputStream(new FileInputStream(LIBRARY_FILE));) {
-			    
-					self = (library) lof.readObject();
-					Calendar.getInstance().setDate(self.loadDate);
-					lof.close();
-				}
-				catch (Exception e) {
-					throw new RuntimeException(e);
-				}
-			}
-			else self = new library();
-		}
-		return self;
-	}
+  private static Library self;
+  private int bookId;
+  private int memberId;
+  private int libraryId;
+  private Date loadDate;
 
-	
-	public static synchronized void SAVE() {
-		if (self != null) {
-			self.loadDate = Calendar.getInstance().setDate();
-			try (ObjectOutputStream lof = new ObjectOutputStream(new FileOutputStream(LIBRARY_FILE));) {
-				lof.writeObject(self);
-				lof.flush();
-				lof.close();	
-			}
-			catch (Exception e) {
-				throw new RuntimeException(e);
-			}
-		}
-	}
+  private Map<Integer, Book> catalog;
+  private Map<Integer, Member> members;
+  private Map<Integer, loan> loans;
+  private Map<Integer, loan> currentLoans;
+  private Map<Integer, Book> damagedBooks;
 
-	
-	public int BookID() {
-		return BID;
-	}
-	
-	
-	public int MemberID() {
-		return MID;
-	}
-	
-	
-	private int nextBID() {
-		return BID++;
-	}
+  
+  private Library() {
+    catalog = new HashMap<>();
+    members = new HashMap<>();
+    loans = new HashMap<>();
+    currentLoans = new HashMap<>();
+    damagedBooks = new HashMap<>();
+    bookId = 1;
+    memberId = 1;
+    libraryId = 1;
+  }
 
-	
-	private int nextMID() {
-		return MID++;
-	}
+  
+  public static synchronized Library INSTANCE() {
+    if (self == null) {
+      Path path = Paths.get(LIBRARY_FILE);
+      if (Files.exists(path)) {
+        try (ObjectInputStream objectOutputStream = new ObjectInputStream(new FileInputStream(LIBRARY_FILE));) {
+          self = (Library) objectOutputStream.readObject();
+          Calendar.getInstance().setDate(self.loadDate);
+          objectOutputStream.close();
+        } catch (Exception e) {
+          throw new RuntimeException(e);
+        }
+      } else {
+        self = new Library();
+      }
+    }
+    return self;
+  }
 
-	
-	private int nextLID() {
-		return LID++;
-	}
+  
+  public static synchronized void save() {
+    if (self != null) {
+      self.loadDate = Calendar.getInstance().setDate();
+      try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(LIBRARY_FILE));) {
+        objectOutputStream.writeObject(self);
+        objectOutputStream.flush();
+        objectOutputStream.close();
+      } catch (Exception e) {
+        throw new RuntimeException(e);
+      }
+    }
+  }
 
-	
-	public List<member> Members() {		
-		return new ArrayList<member>(members.values()); 
-	}
+  
+  public int bookId() {
+    return bookId;
+  }
 
+  
+  public int memberId() {
+    return memberId;
+  }
 
-	public List<Book> Books() {		
-		return new ArrayList<Book>(catalog.values()); 
-	}
+  
+  private int nextBookId() {
+    return bookId++;
+  }
 
+  
+  private int nextMemberId() {
+    return memberId++;
+  }
 
-	public List<loan> CurrentLoans() {
-		return new ArrayList<loan>(currentLoans.values());
-	}
+  
+  private int nextLibraryId() {
+    return libraryId++;
+  }
 
+  
+  public List<Member> members() {
+    return new ArrayList<Member>(members.values());
+  }
 
-	public member Add_mem(String lastName, String firstName, String email, int phoneNo) {		
-		member member = new member(lastName, firstName, email, phoneNo, nextMID());
-		members.put(member.getId(), member);		
-		return member;
-	}
+  
+  public List<Book> books() {
+    return new ArrayList<Book>(catalog.values());
+  }
 
-	
-	public Book Add_book(String a, String t, String c) {		
-		Book b = new Book(a, t, c, nextBID());
-		catalog.put(b.getId(), b);		
-		return b;
-	}
+  
+  public List<loan> currentLoans() {
+    return new ArrayList<loan>(currentLoans.values());
+  }
 
-	
-	public member getMember(int memberId) {
-		if (members.containsKey(memberId)) 
-			return members.get(memberId);
-		return null;
-	}
+  
+  public Member addMember(String lastName, String firstName, String email, int phoneNo) {
+    Member newMember = new Member(lastName, firstName, email, phoneNo, nextMemberId());
+    members.put(newMember.getId(), newMember);
+    return newMember;
+  }
 
-	
-	public Book Book(int bookId) {
-		if (catalog.containsKey(bookId)) 
-			return catalog.get(bookId);		
-		return null;
-	}
+  
+  public Book addBook(String a, String t, String c) {
+    Book newBook = new Book(a, t, c, nextBookId());
+    catalog.put(newBook.getId(), newBook);
+    return newBook;
+  }
 
-	
-	public int loanLimit() {
-		return LOAN_LIMIT;
-	}
+  
+  public Member getMember(int memberId) {
+    if (members.containsKey(memberId)) {
+      return members.get(memberId);
+    }
+    return null;
+  }
 
-	
-	public boolean memberCanBorrow(member member) {		
-		if (member.getNumberOfCurrentLoans() == LOAN_LIMIT ) 
-			return false;
-				
-		if (member.getFinesOwed() >= MAX_FINES_OWED) 
-			return false;
-				
-		for (loan loan : member.getLoans()) 
-			if (loan.isOverDue()) 
-				return false;
-			
-		return true;
-	}
+  
+  public Book book(int bookId) {
+    if (catalog.containsKey(bookId)) {
+      return catalog.get(bookId);
+    }
+    return null;
+  }
 
-	
-	public int loansRemainingForMember(member member) {		
-		return LOAN_LIMIT - member.getNumberOfCurrentLoans();
-	}
+  
+  public int loanLimit() {
+    return LOAN_LIMIT;
+  }
 
-	
-	public loan issueLoan(Book book, member member) {
-		Date dueDate = Calendar.getInstance().getDueDate(LOAN_PERIOD);
-		loan loan = new loan(nextLID(), book, member, dueDate);
-		member.takeOutLoan(loan);
-		book.borrow();
-		loans.put(loan.getId(), loan);
-		currentLoans.put(book.getId(), loan);
-		return loan;
-	}
-	
-	
-	public loan getLoanByBookId(int bookId) {
-		if (currentLoans.containsKey(bookId)) {
-			return currentLoans.get(bookId);
-		}
-		return null;
-	}
+  
+  public boolean memberCanBorrow(Member member) {
+    if (member.getNumberOfCurrentLoans() == LOAN_LIMIT) {
+      return false;
+    }
 
-	
-	public double calculateOverDueFine(loan loan) {
-		if (loan.isOverDue()) {
-			long daysOverDue = Calendar.getInstance().getDaysDifference(loan.getDueDate());
-			double fine = daysOverDue * FINE_PER_DAY;
-			return fine;
-		}
-		return 0.0;		
-	}
+    if (member.getFinesOwed() >= MAX_FINES_OWED) {
+      return false;
+    }
 
+    for (loan loan : member.getLoans()) {
+      if (loan.isOverDue()) {
+        return false;
+      }
+    }
 
-	public void dischargeLoan(loan currentLoan, boolean isDamaged) {
-		member member = currentLoan.Member();
-		Book book  = currentLoan.Book();
-		
-		double overDueFine = calculateOverDueFine(currentLoan);
-		member.addFine(overDueFine);	
-		
-		member.dischargeLoan(currentLoan);
-		book.returned(isDamaged);
-		if (isDamaged) {
-			member.addFine(DAMAGE_FEE);
-			damagedBooks.put(book.getId(), book);
-		}
-		currentLoan.Loan();
-		currentLoans.remove(book.getId());
-	}
+    return true;
+  }
 
+  
+  public int loansRemainingForMember(Member member) {
+    return LOAN_LIMIT - member.getNumberOfCurrentLoans();
+  }
 
-	public void checkCurrentLoans() {
-		for (loan loan : currentLoans.values()) {
-			loan.checkOverDue();
-		}		
-	}
+  
+  public loan issueLoan(Book book, Member member) {
+    Date dueDate = Calendar.getInstance().getDueDate(LOAN_PERIOD);
+    loan loan = new loan(nextLibraryId(), book, member, dueDate);
+    member.takeOutLoan(loan);
+    book.borrowBook();
+    loans.put(loan.getId(), loan);
+    currentLoans.put(book.getId(), loan);
+    return loan;
+  }
 
+  
+  public loan getLoanByBookId(int bookId) {
+    if (currentLoans.containsKey(bookId)) {
+      return currentLoans.get(bookId);
+    }
+    return null;
+  }
 
-	public void repairBook(Book currentBook) {
-		if (damagedBooks.containsKey(currentBook.getId())) {
-			currentBook.repair();
-			damagedBooks.remove(currentBook.getId());
-		}
-		else {
-			throw new RuntimeException("Library: repairBook: book is not damaged");
-		}
-		
-	}
-	
-	
+  
+  public double calculateOverDueFine(loan loan) {
+    if (loan.isOverDue()) {
+      long daysOverDue = Calendar.getInstance().getDaysDifference(loan.getDueDate());
+      double fine = daysOverDue * FINE_PER_DAY;
+      return fine;
+    }
+    return 0.0;
+  }
+
+  
+  public void dischargeLoan(loan currentLoan, boolean isDamaged) {
+    Member member = currentLoan.Member();
+    Book book = currentLoan.Book();
+
+    double overDueFine = calculateOverDueFine(currentLoan);
+    member.addFine(overDueFine);
+    member.dischargeLoan(currentLoan);
+    book.returnBook(isDamaged);
+    if (isDamaged) {
+      member.addFine(DAMAGE_FEE);
+      damagedBooks.put(book.getId(), book);
+    }
+    currentLoan.Loan();
+    currentLoans.remove(book.getId());
+  }
+
+  
+  public void checkCurrentLoans() {
+    for (loan loan : currentLoans.values()) {
+      loan.checkOverDue();
+    }
+  }
+
+  
+  public void repairBook(Book currentBook) {
+    if (damagedBooks.containsKey(currentBook.getId())) {
+      currentBook.repairBook();
+      damagedBooks.remove(currentBook.getId());
+    } else {
+      throw new RuntimeException("Library: repairBook: book is not damaged");
+    }
+  }
+
+  
 }
