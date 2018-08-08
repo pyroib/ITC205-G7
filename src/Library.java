@@ -183,7 +183,7 @@ public class Library implements Serializable {
     Date dueDate = Calendar.getInstance().getDueDate(LOAN_PERIOD);
     loan loan = new loan(nextLibraryId(), book, member, dueDate);
     member.takeOutLoan(loan);
-    book.borrow();
+    book.borrowBook();
     loans.put(loan.getId(), loan);
     currentLoans.put(book.getId(), loan);
     return loan;
@@ -215,7 +215,7 @@ public class Library implements Serializable {
     double overDueFine = calculateOverDueFine(currentLoan);
     member.addFine(overDueFine);
     member.dischargeLoan(currentLoan);
-    book.returned(isDamaged);
+    book.returnBook(isDamaged);
     if (isDamaged) {
       member.addFine(DAMAGE_FEE);
       damagedBooks.put(book.getId(), book);
@@ -234,7 +234,7 @@ public class Library implements Serializable {
   
   public void repairBook(Book currentBook) {
     if (damagedBooks.containsKey(currentBook.getId())) {
-      currentBook.repair();
+      currentBook.repairBook();
       damagedBooks.remove(currentBook.getId());
     } else {
       throw new RuntimeException("Library: repairBook: book is not damaged");
