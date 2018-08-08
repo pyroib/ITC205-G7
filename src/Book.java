@@ -22,11 +22,20 @@ public class Book implements Serializable {
     
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Book: ").append(id).append("\n")
-        .append("  Title:  ").append(title).append("\n")
-        .append("  Author: ").append(author).append("\n")
-        .append("  CallNo: ").append(callNo).append("\n")
-        .append("  State:  ").append(bookState);
+        stringBuilder.append("Book: ")
+            .append(id)
+            .append("\n")
+            .append("  Title:  ")
+            .append(title)
+            .append("\n")
+            .append("  Author: ")
+            .append(author)
+            .append("\n")
+            .append("  CallNo: ")
+            .append(callNo)
+            .append("\n")
+            .append("  State:  ")
+            .append(bookState);
         return stringBuilder.toString();
     }
 
