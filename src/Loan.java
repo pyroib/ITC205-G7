@@ -24,16 +24,15 @@ public class Loan implements Serializable {
 
 
 	public void checkOverDue() {
-		if (loanState == LoanState.CURRENT &&
-			Calendar.getInstance().setDate().after(date)) {
+		if (loanState == LoanState.CURRENT && Calendar.getInstance().setDate().after(date)) {
 			this.loanState = LoanState.OVER_DUE;
-			} else {
-				String checkOverDueException = String.format("Loan: cannot borrow while Loan is in state: %s", loanState);
-				throw new RuntimeException(checkOverDueException);
-				}
+		} else {
+		String checkOverDueException = String.format("Loan: cannot borrow while Loan is in state: %s", loanState);
+		throw new RuntimeException(checkOverDueException);
+		}
 	}
 
-	
+
 	public boolean isOverDue() {
 		return loanState == LoanState.OVER_DUE;
 	}
@@ -90,5 +89,6 @@ public class Loan implements Serializable {
 	public void updateLoan() {
 		loanState = LoanState.DISCHARGED;		
 	}
+
 
 }
