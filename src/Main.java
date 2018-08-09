@@ -1,9 +1,7 @@
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
-/*
-*ITC205 Asg2 - Group7 (Jasmine, Ian, Meraj)
-*/
+//ITC205 Asg2 - Group7 (Jasmine, Ian, Meraj)
 
 public class Main {
 
@@ -181,7 +179,6 @@ public class Main {
 
 	
 	private static void addBook() {
-
 		String author = memberInput("Enter author: ");
 		String title = memberInput("Enter title: ");
 		String callNo = memberInput("Enter call number: ");
