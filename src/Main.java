@@ -132,7 +132,7 @@ public class Main {
 
 	private static void listCurrentLoans() {
 		output("");
-		for (loan loan : LIB.currentLoans()) {
+		for (Loan loan : LIB.currentLoans()) {
 			output(loan + "\n");
 		}		
 	}
