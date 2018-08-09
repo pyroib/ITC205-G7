@@ -220,7 +220,7 @@ public class Library implements Serializable {
       member.addFine(DAMAGE_FEE);
       damagedBooks.put(book.getId(), book);
     }
-    currentLoan.Loan();
+    currentLoan.updateLoan();
     currentLoans.remove(book.getId());
   }
 
