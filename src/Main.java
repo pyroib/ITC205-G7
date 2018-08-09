@@ -36,7 +36,7 @@ public class Main {
 		return stringBuilder.toString();
 	}
 
-	
+
 	public static void main(String[] args) {
 		try {
 			userInput = new Scanner(System.in);
@@ -122,7 +122,9 @@ public class Main {
 
 	
 	private static void payFine() {
-		new PayFineUi(new PayFineControl()).run();
+		PayFineControl payFineControl = new PayFineControl();
+		PayFineUi payFineUi = new PayFineUi(payFineControl);
+		payFineUi.run();	
 	}
 
 	
@@ -151,17 +153,23 @@ public class Main {
 
 	
 	private static void borrowBook() {
-		new BorrowBookUi(new BorrowBookControl()).run();
+		BorrowBookControl borrowBookControl = new BorrowBookControl();
+		BorrowBookUi borrowBookUi = new BorrowBookUi(borrowBookControl);
+		borrowBookUi.run();	
 	}
 
-	
+
 	private static void returnBook() {
-		new ReturnBookUi(new ReturnBookControl()).run();
+		ReturnBookControl returnBookControl = new ReturnBookControl();
+		ReturnBookUi returnBookUi = new ReturnBookUi(returnBookControl);
+		returnBookUi.run();	
 	}
 
 	
 	private static void fixBooks() {
-		new FixBookUi(new FixBookControl()).run();
+		FixBookControl fixBookControl = new FixBookControl();
+		FixBookUi fixBookUi = new FixBookUi(fixBookControl);
+		fixBookUi.run();	
 	}
 
 	
