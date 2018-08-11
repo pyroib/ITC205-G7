@@ -127,7 +127,7 @@ public class Main {
 
 	private static void listCurrentLoans() {
 		memberOutput("");
-		for (loan loan : library.currentLoans()) {
+		for (Loan loan : library.currentLoans()) {
 			memberOutput(loan + "\n");
 		}
 	}
@@ -220,4 +220,5 @@ public class Main {
 
 
 }
+
 
