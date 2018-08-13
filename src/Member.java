@@ -1,3 +1,8 @@
+/*
+ * ready for final static review
+ * Ian Blott
+ */
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;

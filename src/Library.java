@@ -1,3 +1,8 @@
+/*
+ * ready for final static review
+ * Ian Blott
+ */
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
