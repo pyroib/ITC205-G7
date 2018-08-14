@@ -1,8 +1,3 @@
-/*
- * ready for final static review
- * Ian Blott
- */
-
 import java.util.Scanner;
 
 public class ReturnBookUi {
