@@ -1,7 +1,3 @@
-/*
- * ready for final static review
- * Ian Blott
- */
 public class ReturnBookControl {
     
     private ReturnBookUi UI;
