@@ -30,27 +30,27 @@ public class Member implements Serializable {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Member:  ")
-            .append(ID)
-            .append("\n")
-            .append("  Name:  ")
-            .append(lastName)
-            .append(", ")
-            .append(firstName)
-            .append("\n")
-            .append("  Email: ")
-            .append(email)
-            .append("\n")
-            .append("  Phone: ")
-            .append(phoneNumber)
-            .append("\n")
-            .append(String.format("  Fines Owed :  $%.2f", fines))
-            .append("\n");
+        .append(ID)
+        .append("\n")
+        .append("  Name:  ")
+        .append(lastName)
+        .append(", ")
+        .append(firstName)
+        .append("\n")
+        .append("  Email: ")
+        .append(email)
+        .append("\n")
+        .append("  Phone: ")
+        .append(phoneNumber)
+        .append("\n")
+        .append(String.format("  Fines Owed :  $%.2f", fines))
+        .append("\n");
         for (Loan loan : loans.values()) {
             stringBuilder.append(loan).append("\n");
         }
         return stringBuilder.toString();
     }
-    
+
     
     public int getId() {
         return ID;
