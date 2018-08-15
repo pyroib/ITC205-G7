@@ -39,13 +39,13 @@ public class ReturnBookControl {
         
         Book currentBook = library.book(bookId);
         if (currentBook == null) {
-            ui.displayOutput("Invalid Book Id");
+            ui.printOutput("Invalid Book Id");
             return;
         }
         
         Boolean isCurrentBookOnLoan = currentBook.onLoan();
         if (!isCurrentBookOnLoan) {
-            ui.displayOutput("Book has not been borrowed");
+            ui.printOutput("Book has not been borrowed");
             return;
         }
         
@@ -57,15 +57,15 @@ public class ReturnBookControl {
             overDueFine = library.calculateOverDueFine(currentLoan);
         }
         
-        ui.displayOutput("Inspecting");
+        ui.printOutput("Inspecting");
         String currentBookString = currentBook.toString();
-        ui.displayOutput(currentBookString);
+        ui.printOutput(currentBookString);
         
         String currentLoanString = currentBook.toString();
-        ui.displayOutput(currentLoanString);
+        ui.printOutput(currentLoanString);
         
         if (isCurrentLoanOverDue) {
-            ui.displayOutput(String.format("\nOverdue fine : $%.2f", overDueFine));
+            ui.printOutput(String.format("\nOverdue fine : $%.2f", overDueFine));
         }
         
         ui.setState(ReturnBookUi.UiState.INSPECTING);
