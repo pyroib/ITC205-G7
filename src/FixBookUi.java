@@ -5,7 +5,6 @@ public class FixBookUi {
     public static enum UiState {
         INITIALISED, READY, FIXING, COMPLETED
     };
-    
     private FixBookControl fixBookControl;
     private Scanner userInput;
     private UiState uiState;
