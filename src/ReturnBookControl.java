@@ -72,6 +72,7 @@ public class ReturnBookControl {
         controlState = ControlState.INSPECTING;
     }
     
+    
     public void scanningComplete() {
         Boolean currentControlStateReady = controlState.equals(ControlState.READY);
         if (!currentControlStateReady) {
@@ -81,6 +82,7 @@ public class ReturnBookControl {
         
         ui.setState(ReturnBookUi.UiState.COMPLETED);
     }
+    
     
     public void dischargeLoan(boolean isDamaged) {
         Boolean currentControlStateInpecting = controlState.equals(ControlState.INSPECTING);
