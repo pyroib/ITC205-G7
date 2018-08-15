@@ -122,7 +122,7 @@ public class Library implements Serializable {
     
     public Member addMember(String lastName, String firstName, String email, int phoneNo) {
         Member newMember = new Member(lastName, firstName, email, phoneNo, nextMemberId());
-        members.put(newMember.getId(), newMember);
+        members.put(newMember.getMemberId(), newMember);
         return newMember;
     }
     
@@ -164,7 +164,7 @@ public class Library implements Serializable {
             return false;
         }
         
-        for (Loan loan : member.getLoans()) {
+        for (Loan loan : member.getMemberLoans()) {
             if (loan.isOverDue()) {
                 return false;
             }
