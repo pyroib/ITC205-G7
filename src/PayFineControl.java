@@ -38,11 +38,11 @@ public class PayFineControl {
         member = library.getMember(memberId);
         
         if (member == null) {
-            ui.display("Invalid Member Id");
+            ui.printOutput("Invalid Member Id");
             return;
         }
         String memberData = member.toString();
-        ui.display(memberData);
+        ui.printOutput(memberData);
         ui.setState(PayFineUi.UiState.PAYING);
         controlState = ControlState.PAYING;
     }
@@ -63,10 +63,10 @@ public class PayFineControl {
         double change = member.payFine(amount);
         if (change > 0) {
             String displayMessage = String.format("Change: $%.2f", change);
-            ui.display(displayMessage);
+            ui.printOutput(displayMessage);
         }
         String memberData = member.toString();
-        ui.display(memberData);
+        ui.printOutput(memberData);
         ui.setState(PayFineUi.UiState.COMPLETED);
         controlState = ControlState.COMPLETED;
         return change;
