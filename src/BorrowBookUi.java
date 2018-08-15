@@ -35,30 +35,30 @@ public class BorrowBookUi {
                     String memberString = getInput("Swipe member card (press <enter> to cancel): ");
                     int memberLength = memberString.length();
                     if (memberLength == 0) {
-                        control.cancel();
+                        control.cancelBorrowing();
                         break;
                     }
                     try {
                         int memberId = Integer.valueOf(memberString).intValue();
-                        control.swiped(memberId);
+                        control.swipedCard(memberId);
                     } catch (NumberFormatException excepted1) {
                         printOutput("Invalid Member Id");
                     }
                     break;
             case RESTRICTED:
                 getInput("Press <any key> to cancel");
-                control.cancel();
+                control.cancelBorrowing();
                 break;
             case SCANNING:
                 String bookString = getInput("Scan Book (<enter> completes): ");
                 int bookLength = bookString.length();
                 if (bookLength == 0) {
-                    control.complete();
+                    control.completeBorrowing();
                     break;
                 }
                 try {
                     int bookId = Integer.valueOf(bookString).intValue();
-                    control.scanned(bookId);
+                    control.scannedBook(bookId);
                 } catch (NumberFormatException excepted2) {
                     printOutput("Invalid Book Id");
                 }
@@ -67,7 +67,7 @@ public class BorrowBookUi {
                 String answer = getInput("Commit loans? (Y/N): ");
                 boolean answerNo = answer.toUpperCase().equals("N");
                 if (answerNo) {
-                    control.cancel();
+                    control.cancelBorrowing();
                 } else {
                     control.commitLoans();
                     getInput("Press <any key> to complete ");

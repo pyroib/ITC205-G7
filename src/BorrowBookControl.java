@@ -76,12 +76,12 @@ public class BorrowBookControl {
         pending.add(book);
         for (Book book : pending) {
         	String bookInformation = book.toString();
-            ui.displayOutput(book.toString());
+            ui.displayOutput(bookInformation);
         }
         boolean limitReached = library.loansRemainingForMember(member) - pending.size() == 0;
         if (limitReached) {
             ui.displayOutput("Loan limit reached");
-            complete();
+            completeBorrowing();
         }
     }
     
@@ -89,12 +89,12 @@ public class BorrowBookControl {
     public void completeBorrowing() {
     	boolean borrowingSize = pending.size() == 0;
         if (borrowingSize) {
-            cancel();
+            cancelBorrowing();
         } else {
             ui.displayOutput("\nFinal Borrowing List");
             for (Book book : pending) {
             	String bookInformation = book.toString();
-                ui.displayOutput(book.toString());
+                ui.displayOutput(bookInformation);
             }
             completed = new ArrayList<Loan>();
             ui.setState(BorrowBookUi.UiState.FINALISING);
