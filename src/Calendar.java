@@ -13,7 +13,7 @@ public class Calendar {
     
     public static Calendar getInstance() {
         if (self == null) {
-          self = new Calendar();
+            self = new Calendar();
         }
         return self;
     }
@@ -26,26 +26,26 @@ public class Calendar {
     
     public synchronized void setDate(Date date) {
         try {
-          calendar.setTime(date);
-          calendar.set(java.util.Calendar.HOUR_OF_DAY, 0);
-          calendar.set(java.util.Calendar.MINUTE, 0);
-          calendar.set(java.util.Calendar.SECOND, 0);
-          calendar.set(java.util.Calendar.MILLISECOND, 0);
-        } catch (Exception e) {
-          throw new RuntimeException(e);
+            calendar.setTime(date);
+            calendar.set(java.util.Calendar.HOUR_OF_DAY, 0);
+            calendar.set(java.util.Calendar.MINUTE, 0);
+            calendar.set(java.util.Calendar.SECOND, 0);
+            calendar.set(java.util.Calendar.MILLISECOND, 0);
+        } catch (Exception expected1) {
+            throw new RuntimeException(expected1);
         }
     }
 
     
     public synchronized Date setDate() {
         try {
-          calendar.set(java.util.Calendar.HOUR_OF_DAY, 0);
-          calendar.set(java.util.Calendar.MINUTE, 0);
-          calendar.set(java.util.Calendar.SECOND, 0);
-          calendar.set(java.util.Calendar.MILLISECOND, 0);
-          return calendar.getTime();
-        } catch (Exception e) {
-          throw new RuntimeException(e);
+            calendar.set(java.util.Calendar.HOUR_OF_DAY, 0);
+            calendar.set(java.util.Calendar.MINUTE, 0);
+            calendar.set(java.util.Calendar.SECOND, 0);
+            calendar.set(java.util.Calendar.MILLISECOND, 0);
+            return calendar.getTime();
+        } catch (Exception expected2) {
+            throw new RuntimeException(expected2);
         }
     }
 
