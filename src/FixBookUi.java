@@ -24,7 +24,7 @@ public class FixBookUi {
     public void setState(UiState state) {
         this.uiState = state;
     }
-
+    
     
     public void run() {
         printOutput("Fix Book Use Case UI\n");
