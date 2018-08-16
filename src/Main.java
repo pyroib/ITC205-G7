@@ -167,7 +167,7 @@ public class Main {
     private static void fixBooks() {
         FixBookControl fixBookControl = new FixBookControl();
         FixBookUi fixBookUi = new FixBookUi(fixBookControl);
-        fixBookUi.run();
+        fixBookUi.runFixBookUi();
     }
     
     
