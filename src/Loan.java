@@ -56,7 +56,7 @@ public class Loan implements Serializable {
 		.append(id)
 		.append("\n")
 		.append("  Borrower ")
-		.append(member.getId())
+		.append(member.getMemberId())
 		.append(" : ")
 		.append(member.getLastName())
 		.append(", ")

@@ -43,11 +43,11 @@ public class Main {
 			calender = Calendar.getInstance();
 			simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-			for (Member member : library.members()) {
+			for (Member member : library.getMembers()) {
 				memberOutput(member);
 			}
 			memberOutput(" ");
-			for (Book book : library.books()) {
+			for (Book book : library.getBooks()) {
 				memberOutput(book);
 			}
 
@@ -127,7 +127,7 @@ public class Main {
 
 	private static void listCurrentLoans() {
 		memberOutput("");
-		for (Loan loan : library.currentLoans()) {
+		for (Loan loan : library.getCurrentLoans()) {
 			memberOutput(loan + "\n");
 		}
 	}
@@ -135,7 +135,7 @@ public class Main {
 
 	private static void listBooks() {
 		memberOutput("");
-		for (Book book : library.books()) {
+		for (Book book : library.getBooks()) {
 			memberOutput(book + "\n");
 		}
 	}
@@ -143,7 +143,7 @@ public class Main {
 
 	private static void listMembers() {
 		memberOutput("");
-		for (Member member : library.members()) {
+		for (Member member : library.getMembers()) {
 			memberOutput(member + "\n");
 		}
 	}
@@ -159,7 +159,7 @@ public class Main {
 	private static void returnBook() {
 		ReturnBookControl returnBookControl = new ReturnBookControl();
 		ReturnBookUi returnBookUi = new ReturnBookUi(returnBookControl);
-		returnBookUi.run();	
+		returnBookUi.runReturnBook();	
 	}
 
 

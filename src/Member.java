@@ -46,18 +46,19 @@ public class Member implements Serializable {
             .append(String.format("  Fines Owed :  $%.2f", fines))
             .append("\n");
         for (Loan loan : loans.values()) {
-            stringBuilder.append(loan).append("\n");
+            stringBuilder.append(loan)
+                .append("\n");
         }
         return stringBuilder.toString();
     }
 
     
-    public int getId() {
+    public int getMemberId() {
         return ID;
     }
     
     
-    public List<Loan> getLoans() {
+    public List<Loan> getMemberLoans() {
         List<Loan> loansList = new ArrayList<Loan>(loans.values());
         return loansList;
     }
