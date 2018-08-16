@@ -34,7 +34,7 @@ public class Main {
             
             while (!userSelection) {
                 Date setDate = calender.setDate();
-                String currentDate = simpleDateFormat.format(setDate)
+                String currentDate = simpleDateFormat.format(setDate);
                 printOutput("\n" + currentDate);
                 String userEntry = userInput(menu);
                 
