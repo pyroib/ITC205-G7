@@ -55,7 +55,7 @@ public class Loan implements Serializable {
     public String toString() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         
-        int memberId = member.getId();
+        int memberId = member.getMemberId();
         String lastName = member.getLastName();
         String firstName = member.getFirstName();
         
