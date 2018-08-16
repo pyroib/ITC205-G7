@@ -66,35 +66,41 @@ public class Book implements Serializable {
 
     
     public void borrowBook() {
-        if (bookState.equals(BookState.AVAILABLE)) {
-          bookState = BookState.ON_LOAN;
+    	boolean bookAvailable = bookState.equals(BookState.AVAILABLE);
+        if (bookAvailable) {
+            bookState = BookState.ON_LOAN;
         } else {
-          String borrowBookException = String.format("Book: cannot borrow while book is in state: %s", bookState);
-          throw new RuntimeException(borrowBookException);
+            String borrowBookException = String.format("Book: cannot borrow while book is in state:"
+                + " %s", bookState);
+            throw new RuntimeException(borrowBookException);
         }
     }
 
     
     public void returnBook(boolean DAMAGED) {
-        if (bookState.equals(BookState.ON_LOAN)) {
-          if (DAMAGED) {
-            bookState = BookState.DAMAGED;
-          } else {
-            bookState = BookState.AVAILABLE;
-          }
+    	boolean bookOnLoan = bookState.equals(BookState.ON_LOAN);
+        if (bookOnLoan) {
+            if (DAMAGED) {
+                bookState = BookState.DAMAGED;
+            } else {
+                bookState = BookState.AVAILABLE;
+            }
         } else {
-          String returnBookException = String.format("Book: cannot Return while book is in state: %s", bookState);
-          throw new RuntimeException(returnBookException);
+            String returnBookException = String.format("Book: cannot Return while book is in state:"
+                + " %s", bookState);
+            throw new RuntimeException(returnBookException);
         }
     }
 
     
     public void repairBook() {
-        if (bookState.equals(BookState.DAMAGED)) {
-          bookState = BookState.AVAILABLE;
+    	boolean bookDamaged = bookState.equals(BookState.DAMAGED);
+        if (bookDamaged) {
+            bookState = BookState.AVAILABLE;
         } else {
-          String repairBookException = String.format("Book: cannot repair while book is in state: %s", bookState);
-          throw new RuntimeException(repairBookException);
+            String repairBookException = String.format("Book: cannot repair while book is in state:"
+                + " %s", bookState);
+            throw new RuntimeException(repairBookException);
         }
     }
 
