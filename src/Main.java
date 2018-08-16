@@ -159,7 +159,7 @@ public class Main {
 	private static void returnBook() {
 		ReturnBookControl returnBookControl = new ReturnBookControl();
 		ReturnBookUi returnBookUi = new ReturnBookUi(returnBookControl);
-		returnBookUi.run();	
+		returnBookUi.runReturnBook();	
 	}
 
 

@@ -18,7 +18,7 @@ public class ReturnBookUi {
     }
     
     
-    public void run() {
+    public void runReturnBook() {
         printOutput("Return Book Use Case UI\n");
         while (true) {
             switch (uiState) {
