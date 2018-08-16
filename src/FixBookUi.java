@@ -18,7 +18,7 @@ public class FixBookUi {
     }
     
     
-    public void setState(UiState state) {
+    public void setUiState(UiState state) {
         this.uiState = state;
     }
     
