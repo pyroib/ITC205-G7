@@ -177,7 +177,8 @@ public class Main {
             int days = Integer.valueOf(userInput).intValue();
             calender.incrementDate(days);
             library.checkCurrentLoans();
-            printOutput(simpleDateFormat.format(calender.setDate()));
+            String currentDate = simpleDateFormat.format(calender.setDate());
+            printOutput(currentDate);
             
         } catch (NumberFormatException e) {
             printOutput("\nInvalid number of days\n");
