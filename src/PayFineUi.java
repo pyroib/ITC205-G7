@@ -7,13 +7,13 @@ public class PayFineUi {
         INITIALISED, READY, PAYING, COMPLETED, CANCELLED
     };
     private PayFineControl payFineControl;
-    private Scanner input;
+    private Scanner scannerInput;
     private UiState uiState;
     
     
     public PayFineUi(PayFineControl control) {
         this.payFineControl = control;
-        input = new Scanner(System.in);
+        scannerInput = new Scanner(System.in);
         uiState = UiState.INITIALISED;
         control.setUi(this);
     }
@@ -89,7 +89,7 @@ public class PayFineUi {
     
     private String userInput(String prompt) {
         System.out.print(prompt);
-        return input.nextLine();
+        return scannerInput.nextLine();
     }
     
 
