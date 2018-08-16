@@ -1,4 +1,5 @@
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
@@ -32,7 +33,9 @@ public class Main {
             boolean userSelection = false;
             
             while (!userSelection) {
-                printOutput("\n" + simpleDateFormat.format(calender.setDate()));
+                Date setDate = calender.setDate();
+                String currentDate = simpleDateFormat.format(setDate)
+                printOutput("\n" + currentDate);
                 String userEntry = userInput(menu);
                 
                 switch (userEntry.toUpperCase()) {
@@ -177,7 +180,8 @@ public class Main {
             int days = Integer.valueOf(userInput).intValue();
             calender.incrementDate(days);
             library.checkCurrentLoans();
-            String currentDate = simpleDateFormat.format(calender.setDate());
+            Date setDate = calender.setDate();
+            String currentDate = simpleDateFormat.format(setDate);
             printOutput(currentDate);
             
         } catch (NumberFormatException e) {
