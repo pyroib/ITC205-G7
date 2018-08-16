@@ -49,7 +49,8 @@ public class FixBookUi {
                     String answer = getUserInput("Fix Book? (Y/N) : ");
                     String uppercaseAnswer = answer.toUpperCase();
                     boolean mustFix = false;
-                    if (uppercaseAnswer.equals("Y")) {
+                    boolean upperAnswer = uppercaseAnswer.equals("Y");
+                    if (upperAnswer) {
                         mustFix = true;
                     }
                     fixBookControl.fixBook(mustFix);
