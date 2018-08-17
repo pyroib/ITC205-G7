@@ -208,8 +208,8 @@ public class Library implements Serializable {
     
     
     public void dischargeLoan(Loan currentLoan, boolean isDamaged) {
-        Member member = currentLoan.Member();
-        Book book = currentLoan.Book();
+        Member member = currentLoan.getMember();
+        Book book = currentLoan.getBook();
         
         double overDueFine = calculateOverDueFine(currentLoan);
         member.addFine(overDueFine);
@@ -220,7 +220,7 @@ public class Library implements Serializable {
             int bookId = book.getId();
             damagedBooks.put(bookId, book);
         }
-        currentLoan.updateLoan();
+        currentLoan.dischargeLoan();
         currentLoans.remove(book.getId());
     }
     
